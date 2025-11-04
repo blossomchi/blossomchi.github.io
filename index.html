@@ -1,19 +1,350 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Blossom Oyem – AI & Robotics</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blossom Oyem — AI & Robotics</title>
+  <meta name="description" content="Blossom Oyem — Senior Machine Learning Engineer & Robotics Enthusiast. Projects: AI chatbot, smart bin, house price predictor and more."/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#06b6d4; /* teal */
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, var(--bg) 0%, #08101a 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Layout */
+    .container{max-width:1100px;margin:0 auto;padding:28px;}
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#3b82f6);
+      display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#021124;font-size:20px;
+      box-shadow:0 6px 18px rgba(3,7,18,0.6);
+    }
+    nav{display:flex;gap:20px;align-items:center}
+    .btn-ghost{border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;font-weight:600;background:transparent;color:var(--muted)}
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;margin-top:28px;
+    }
+    .hero-left h1{font-size:36px;margin:0 0 10px 0;line-height:1.05}
+    .hero-left p.lead{color:var(--muted);margin:0 0 18px 0}
+    .cta-row{display:flex;gap:12px;align-items:center;margin-top:8px}
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent),#60a5fa);
+      border:none;padding:12px 18px;border-radius:10px;color:#021124;font-weight:700;cursor:pointer;
+      box-shadow:0 8px 22px rgba(6,182,212,0.12)
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(2,6,12,0.6);border:1px solid rgba(255,255,255,0.03)
+    }
+    .hero-right .card{padding:18px;text-align:center}
+    .avatar{
+      width:120px;height:120px;border-radius:14px;display:inline-block;overflow:hidden;background:linear-gradient(135deg,#111827,#0b1220);
+      margin:0 auto 12px auto;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);
+      font-size:28px;
+    }
+
+    /* Projects */
+    .section{margin-top:36px}
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+    .project{
+      padding:14px;border-radius:10px;background:var(--card);min-height:120px;display:flex;flex-direction:column;justify-content:space-between;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .project:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(2,6,12,0.6)}
+    .project h4{margin:0 0 8px 0}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* Skills & Contact */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+    ul.skills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+    ul.skills li{background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600;font-size:13px}
+
+    footer{margin-top:48px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+    .socials a{margin-left:12px;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:20px}
+      .projects-grid{grid-template-columns:repeat(2,1fr)}
+      .two-col{grid-template-columns:1fr}
+      nav{display:none}
+      .mobile-menu-toggle{display:inline-flex}
+    }
+    @media (max-width:560px){
+      .projects-grid{grid-template-columns:1fr}
+      .brand .logo{width:50px;height:50px;font-size:18px}
+      .hero-left h1{font-size:28px}
+    }
+
+    /* mobile nav menu */
+    .mobile-menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.05);padding:8px;border-radius:8px;color:var(--muted)}
+    .mobile-menu{display:none;position:fixed;top:72px;right:12px;background:var(--card);padding:12px;border-radius:10px;box-shadow:0 10px 36px rgba(2,6,12,0.6)}
+    .mobile-menu a{display:block;padding:8px 10px;border-radius:8px;color:var(--muted)}
+  </style>
 </head>
 <body>
-    <h1>Welcome to Blossom Oyem’s Website</h1>
-    <ul>
-  <li><a href="project1.html">AI Chatbot Project</a></li>
-  <li><a href="project2.html">Smart Bin System</a></li>
-  <li><a href="project3.html">House Price Prediction</a></li>
-</ul>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">BO</div>
+        <div>
+          <div style="font-weight:800">Blossom Oyem</div>
+          <div style="font-size:13px;color:var(--muted)">Senior Machine Learning Engineer · Robotics</div>
+        </div>
+      </div>
 
-     <p>Senior Machine Learning Engineer | Robotics Enthusiast</p>
+      <nav>
+        <a href="#projects" class="btn-ghost">Projects</a>
+        <a href="#about" class="btn-ghost">About</a>
+        <a href="#contact" class="btn-ghost">Contact</a>
+        <a href="https://github.com/blossomchi" target="_blank" class="btn-ghost">GitHub</a>
+      </nav>
 
-    <p>Senior Ready to go | Robotics Enthusiast</p>
-    <p>Explore my projects and research below.</p>
+      <button class="mobile-menu-toggle" id="mmt">☰</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <h1>Building practical AI & robotic systems for real-world impact</h1>
+          <p class="lead">I design and implement machine learning and robotics solutions — from vision-based systems to deployed prototypes — focused on accessibility and low-resource settings.</p>
+
+          <div class="cta-row">
+            <a class="btn-primary" href="#projects">Explore Projects</a>
+            <a class="btn-ghost" href="#contact">Hire / Collaborate</a>
+          </div>
+
+          <div style="margin-top:18px;color:var(--muted);font-size:14px">
+            <strong>Highlights:</strong>
+            <span style="margin-left:10px">Vision-based assistive robotics • Histopathology AI • Streamlit & full-stack deployment</span>
+          </div>
+        </div>
+
+        <div class="hero-right card">
+          <div class="avatar">BO</div>
+          <div style="font-weight:700;font-size:16px">Blossom Oyem</div>
+          <div style="color:var(--muted);margin-top:6px">Senior Machine Learning Engineer & Robotics Enthusiast</div>
+
+          <div style="margin-top:12px;color:var(--muted);font-size:13px;text-align:left">
+            <strong>Quick links</strong>
+            <ul style="margin:8px 0 0 14px;color:var(--muted)">
+              <li><a href="project1.html">AI Chatbot Project</a></li>
+              <li><a href="project2.html">Smart Bin System</a></li>
+              <li><a href="project3.html">House Price Prediction</a></li>
+              <li><a href="project4.html">Gesture Recognition</a></li>
+              <li><a href="project5.html">Centralized Food Ordering</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <h3 style="margin:0">Projects</h3>
+        <p style="margin-top:8px;color:var(--muted)">Selected projects — click to open the project page (place matching projectN.html files in your repo).</p>
+
+        <div class="projects-grid">
+          <article class="project card">
+            <div>
+              <h4>AI Chatbot Project</h4>
+              <p style="margin:6px 0;color:var(--muted);font-size:13px">Rule-based and neural chatbot demo with Streamlit deployment and intent handling improvements for teens.</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="tags"><span class="tag">Python</span><span class="tag">Streamlit</span></div>
+              <a href="project1.html" class="btn-ghost" style="padding:8px 10px">Open</a>
+            </div>
+          </article>
+
+          <article class="project card">
+            <div>
+              <h4>Smart Bin System</h4>
+              <p style="margin:6px 0;color:var(--muted);font-size:13px">Waterfall-model design, sensor integration, and automated waste sorting prototype using Arduino.</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="tags"><span class="tag">Arduino</span><span class="tag">Embedded</span></div>
+              <a href="project2.html" class="btn-ghost" style="padding:8px 10px">Open</a>
+            </div>
+          </article>
+
+          <article class="project card">
+            <div>
+              <h4>House Price Prediction</h4>
+              <p style="margin:6px 0;color:var(--muted);font-size:13px">Linear regression model + Streamlit app using Bengaluru dataset for interactive price estimation.</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="tags"><span class="tag">Scikit-learn</span><span class="tag">Streamlit</span></div>
+              <a href="project3.html" class="btn-ghost" style="padding:8px 10px">Open</a>
+            </div>
+          </article>
+
+          <article class="project card">
+            <div>
+              <h4>Gesture Recognition & Assistive Robot</h4>
+              <p style="margin:6px 0;color:var(--muted);font-size:13px">Vision-based gestures to control a robotic arm and highlight histopathology regions (pilot study).</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="tags"><span class="tag">PyTorch</span><span class="tag">ResNet</span></div>
+              <a href="project4.html" class="btn-ghost" style="padding:8px 10px">Open</a>
+            </div>
+          </article>
+
+          <article class="project card">
+            <div>
+              <h4>Centralized Online Food Ordering</h4>
+              <p style="margin:6px 0;color:var(--muted);font-size:13px">Prototype with PHP/MySQL, functional UX for order and inventory management.</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span></div>
+              <a href="project5.html" class="btn-ghost" style="padding:8px 10px">Open</a>
+            </div>
+          </article>
+
+          <article class="project card">
+            <div>
+              <h4>Other Demos & Tutorials</h4>
+              <p style="margin:6px 0;color:var(--muted);font-size:13px">Beginner C# examples, ML tutorials, and teaching materials for teens (8–16 yrs).</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="tags"><span class="tag">Teaching</span><span class="tag">Tutorials</span></div>
+              <a href="#" class="btn-ghost" style="padding:8px 10px">Open</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h3 style="margin:0">About</h3>
+        <div class="two-col">
+          <div class="card">
+            <h4 style="margin-top:0">Bio</h4>
+            <p style="color:var(--muted);margin:8px 0">I’m a self-funded engineer from Nigeria focused on building AI and robotics solutions for resource-limited settings. My research interests include computer vision, reinforcement learning for robotics, and deployable ML systems.</p>
+            <p style="margin:8px 0;color:var(--muted)"><strong>Available for:</strong> Research collaborations, mentoring, & consulting.</p>
+          </div>
+
+          <div class="card">
+            <h4 style="margin-top:0">Skills & Tools</h4>
+            <ul class="skills" style="margin-top:10px">
+              <li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Scikit-learn</li><li>Arduino</li><li>Streamlit</li><li>Flask</li>
+            </ul>
+            <div style="margin-top:12px;color:var(--muted);font-size:13px">I supervise student projects and design hands-on bootcamps for ages 8–16.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h3 style="margin:0">Contact</h3>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 340px;gap:16px;">
+          <div class="card">
+            <p style="color:var(--muted)">Want to collaborate or see source code? Send a message — or open the project pages linked above.</p>
+
+            <form id="contactForm" onsubmit="sendMessage(event)" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+              <input type="text" id="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+              <input type="email" id="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+              <textarea id="message" rows="4" placeholder="Message" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
+              <div style="display:flex;gap:8px;justify-content:flex-end">
+                <button type="submit" class="btn-primary">Send</button>
+                <a href="mailto:youremail@example.com" class="btn-ghost" style="display:inline-flex;align-items:center">Email</a>
+              </div>
+            </form>
+
+            <div id="formNote" style="margin-top:8px;color:var(--muted);font-size:13px;display:none">Thanks — message copied to clipboard. Use your email client to complete send.</div>
+          </div>
+
+          <div class="card" style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+            <div>
+              <strong>Location</strong>
+              <div style="color:var(--muted);margin-top:6px">Nigeria</div>
+            </div>
+            <div style="margin-top:8px">
+              <strong>Open to</strong>
+              <div style="color:var(--muted);margin-top:6px">Mentorship · Research collaboration · Consulting</div>
+            </div>
+            <div style="margin-top:8px">
+              <strong>Resume</strong>
+              <div style="margin-top:6px"><a href="#" style="color:var(--accent)">Download CV (placeholder)</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> Blossom Oyem</div>
+      <div class="socials">
+        <a href="https://github.com/blossomchi" target="_blank">GitHub</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">Email</a>
+      </div>
+    </footer>
+
+    <!-- mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/blossomchi" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // mobile menu
+    const mmt = document.getElementById('mmt');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mmt.addEventListener('click', () => {
+      mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          mobileMenu.style.display = 'none';
+        }
+      })
+    });
+
+    // contact form — simple client-side copy to clipboard to avoid backend
+    function sendMessage(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      const body = `Name: ${name}\nEmail: ${email}\n\n${msg}`;
+      navigator.clipboard?.writeText(body).then(()=>{
+        document.getElementById('formNote').style.display='block';
+        setTimeout(()=>document.getElementById('formNote').style.display='none',3500);
+      },()=>{
+        alert('Please copy manually: ' + body);
+      });
+    }
+  </script>
 </body>
 </html>
+
