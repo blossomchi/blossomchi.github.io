@@ -181,13 +181,15 @@ footer {
         </div>
       </div>
 
-      <nav>
-        <a href="#projects" class="btn-ghost">Projects</a>
-        <a href="#about" class="btn-ghost">About</a>
-        <a href="#bodies" class="btn-ghost">Professional Bodies</a>
-        <a href="#contact" class="btn-ghost">Contact</a>
-        <a href="https://github.com/blossomchi" target="_blank" class="btn-ghost">GitHub</a>
-      </nav>
+  <nav>
+  <a href="#projects" class="btn-ghost">Projects</a>
+  <a href="#about" class="btn-ghost">About</a>
+  <a href="#bodies" class="btn-ghost">Professional Bodies</a>
+  <a href="#contact" class="btn-ghost">Contact</a>
+  <a href="https://github.com/blossomchi" target="_blank" class="btn-ghost" rel="noopener noreferrer">
+    GitHub
+  </a>
+</nav>
 
       <button class="mobile-menu-toggle" id="mmt">☰</button>
     </header>
@@ -328,24 +330,36 @@ footer {
       </section>
 
 
-         <section id="bodies" class="section">
-        <h3 style="margin:0">Professional Bodies</h3>
-        <div class="two-col">
-          <div class="card">
-            <h4 style="margin-top:0">Bio</h4>
-            <p style="color:var(--muted);margin:8px 0">I’m a self-funded engineer from Nigeria focused on building AI and robotics solutions for resource-limited settings. My research interests include computer vision, reinforcement learning for robotics, full-stack development, and deployable ML systems.</p>
-            <p style="margin:8px 0;color:var(--muted)"><strong>Available for:</strong> Research collaborations, mentoring, & consulting.</p>
-          </div>
+        <section id="bodies" class="section">
+  <h3 style="margin:0">Professional Bodies</h3>
+  <p style="margin-top:8px;color:var(--muted);">
+    Below are some of the professional organizations I’m a member of or affiliated with.
+  </p>
 
-          <div class="card">
-            <h4 style="margin-top:0">Skills & Tools</h4>
-            <ul class="skills" style="margin-top:10px">
-              <li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Scikit-learn</li><li>Arduino</li><li>Streamlit</li><li>Flask</li>
-            </ul>
-            <div style="margin-top:12px;color:var(--muted);font-size:13px">I supervise student projects and design hands-on bootcamps for ages 8–16.</div>
-          </div>
-        </div>
-      </section>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 18px;">
+    
+    <!-- NAAIP Membership -->
+    <div class="card" style="text-align:center; padding:14px;">
+      <img src="NAAIP.jpg" alt="NAAIP Membership" 
+           style="width:100%; height:220px; object-fit:cover; border-radius:10px;">
+      <h4 style="margin-top:10px;">NAAIP</h4>
+      <p style="color:var(--muted);font-size:13px;">
+        National Association of Artificial Intelligence Professionals.
+      </p>
+    </div>
+
+    <!-- ACSP Membership -->
+    <div class="card" style="text-align:center; padding:14px;">
+      <img src="ACSP.jpg" alt="ACSP Membership" 
+           style="width:100%; height:220px; object-fit:cover; border-radius:10px;">
+      <h4 style="margin-top:10px;">ACSP</h4>
+      <p style="color:var(--muted);font-size:13px;">
+        Association of Cyber Security Professionals.
+      </p>
+    </div>
+  </div>
+</section>
+
 
 
       <section id="contact" class="section">
