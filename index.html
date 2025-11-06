@@ -164,6 +164,19 @@ footer {
       .hero-left h1{font-size:28px}
     }
 
+        /* CONTACT SECTION RESPONSIVE FIX */
+      @media (max-width: 768px) {
+        .contact-grid {
+          grid-template-columns: 1fr; /* stack vertically */
+        }
+
+        .contact-grid .card {
+          width: 100%;
+        }
+      }
+
+
+
     /* mobile nav menu */
     .mobile-menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.05);padding:8px;border-radius:8px;color:var(--muted)}
     .mobile-menu{display:none;position:fixed;top:72px;right:12px;background:var(--card);padding:12px;border-radius:10px;box-shadow:0 10px 36px rgba(2,6,12,0.6)}
@@ -368,41 +381,55 @@ footer {
 
 
 
-      <section id="contact" class="section">
-        <h3 style="margin:0">Contact</h3>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 340px;gap:16px;">
-          <div class="card">
-            <p style="color:var(--muted)">Want to collaborate or see source code? Send a message — or open the project pages linked above.</p>
+     <section id="contact" class="section">
+  <h3 style="margin:0">Contact</h3>
+  <div class="contact-grid" style="
+    margin-top:12px;
+    display:grid;
+    grid-template-columns:1fr 340px;
+    gap:16px;
+  ">
+    <!-- Contact Form -->
+    <div class="card">
+      <p style="color:var(--muted)">Want to collaborate or see source code? Send a message — or open the project pages linked above.</p>
 
-            <form id="contactForm" onsubmit="sendMessage(event)" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
-              <input type="text" id="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
-              <input type="email" id="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
-              <textarea id="message" rows="4" placeholder="Message" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
-              <div style="display:flex;gap:8px;justify-content:flex-end">
-                <button type="submit" class="btn-primary">Send</button>
-                <a href="mailto:youremail@example.com" class="btn-ghost" style="display:inline-flex;align-items:center">Email</a>
-              </div>
-            </form>
-
-            <div id="formNote" style="margin-top:8px;color:var(--muted);font-size:13px;display:none">Thanks — message copied to clipboard. Use your email client to complete send.</div>
-          </div>
-
-          <div class="card" style="display:flex;flex-direction:column;gap:10px;justify-content:center">
-            <div>
-              <strong>Location</strong>
-              <div style="color:var(--muted);margin-top:6px">Nigeria</div>
-            </div>
-            <div style="margin-top:8px">
-              <strong>Open to</strong>
-              <div style="color:var(--muted);margin-top:6px">Mentorship · Research collaboration · Consulting</div>
-            </div>
-            <div style="margin-top:8px">
-              <strong>Resume</strong>
-              <div style="margin-top:6px"><a href="#" style="color:var(--accent)">Download CV (placeholder)</a></div>
-            </div>
-          </div>
+      <form id="contactForm" onsubmit="sendMessage(event)" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+        <input type="text" id="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+        <input type="email" id="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+        <textarea id="message" rows="4" placeholder="Message" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button type="submit" class="btn-primary">Send</button>
+          <a href="mailto:youremail@example.com" class="btn-ghost" style="display:inline-flex;align-items:center">Email</a>
         </div>
-      </section>
+      </form>
+
+      <div id="formNote" style="margin-top:8px;color:var(--muted);font-size:13px;display:none">
+        Thanks — message copied to clipboard. Use your email client to complete send.
+      </div>
+    </div>
+
+    <!-- Location / Resume Card -->
+    <div class="card" style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+      <div>
+        <strong>Location</strong>
+        <div style="color:var(--muted);margin-top:6px">Nigeria</div>
+      </div>
+      <div style="margin-top:8px">
+        <strong>Open to</strong>
+        <div style="color:var(--muted);margin-top:6px">Mentorship · Research collaboration · Consulting</div>
+      </div>
+      <div style="margin-top:8px">
+        <strong>Resume</strong>
+        <div style="margin-top:6px">
+          <a href="#" style="color:var(--accent)">Download CV (placeholder)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
     </main>
 
     <footer>
