@@ -175,6 +175,24 @@ footer {
         }
       }
 
+              /* CONTACT GRID LAYOUT */
+        .contact-grid {
+          display: grid;
+          grid-template-columns: 1fr 340px;
+          gap: 16px;
+          align-items: stretch;
+        }
+
+        /* RESPONSIVE FIX */
+        @media (max-width: 900px) {
+          .contact-grid {
+            grid-template-columns: 1fr; /* stack vertically */
+          }
+
+          .contact-grid .card {
+            width: 100%;
+          }
+        }
 
 
     /* mobile nav menu */
@@ -383,12 +401,7 @@ footer {
 
      <section id="contact" class="section">
   <h3 style="margin:0">Contact</h3>
-  <div class="contact-grid" style="
-    margin-top:12px;
-    display:grid;
-    grid-template-columns:1fr 340px;
-    gap:16px;
-  ">
+  <div class="contact-grid">
     <!-- Contact Form -->
     <div class="card">
       <p style="color:var(--muted)">Want to collaborate or see source code? Send a message — or open the project pages linked above.</p>
@@ -427,6 +440,7 @@ footer {
     </div>
   </div>
 </section>
+
 
 
 
