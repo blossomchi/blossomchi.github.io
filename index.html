@@ -164,35 +164,74 @@ footer {
       .hero-left h1{font-size:28px}
     }
 
-        /* CONTACT SECTION RESPONSIVE FIX */
-      @media (max-width: 768px) {
-        .contact-grid {
-          grid-template-columns: 1fr; /* stack vertically */
-        }
+       /* === CONTACT SECTION === */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 18px;
+}
 
-        .contact-grid .card {
-          width: 100%;
-        }
-      }
+.contact-form {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-              /* CONTACT GRID LAYOUT */
-        .contact-grid {
-          display: grid;
-          grid-template-columns: 1fr 340px;
-          gap: 16px;
-          align-items: stretch;
-        }
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: transparent;
+  color: inherit;
+}
 
-        /* RESPONSIVE FIX */
-        @media (max-width: 900px) {
-          .contact-grid {
-            grid-template-columns: 1fr; /* stack vertically */
-          }
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
 
-          .contact-grid .card {
-            width: 100%;
-          }
-        }
+.form-note {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  display: none;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  text-align: left;
+}
+
+.contact-info .muted {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* === MOBILE RESPONSIVENESS === */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .contact-info {
+    text-align: center;
+    align-items: center;
+  }
+
+  .form-actions {
+    justify-content: center;
+  }
+}
+
 
 
     /* mobile nav menu */
@@ -399,47 +438,52 @@ footer {
 
 
 
-     <section id="contact" class="section">
+    <section id="contact" class="section">
   <h3 style="margin:0">Contact</h3>
+
   <div class="contact-grid">
     <!-- Contact Form -->
     <div class="card">
-      <p style="color:var(--muted)">Want to collaborate or see source code? Send a message — or open the project pages linked above.</p>
+      <p style="color:var(--muted)">
+        Want to collaborate or see source code? Send a message — or open the project pages linked above.
+      </p>
 
-      <form id="contactForm" onsubmit="sendMessage(event)" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
-        <input type="text" id="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
-        <input type="email" id="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
-        <textarea id="message" rows="4" placeholder="Message" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
-        <div style="display:flex;gap:8px;justify-content:flex-end">
+      <form id="contactForm" onsubmit="sendMessage(event)" class="contact-form">
+        <input type="text" id="name" placeholder="Your name" required>
+        <input type="email" id="email" placeholder="you@example.com" required>
+        <textarea id="message" rows="4" placeholder="Message" required></textarea>
+
+        <div class="form-actions">
           <button type="submit" class="btn-primary">Send</button>
-          <a href="mailto:youremail@example.com" class="btn-ghost" style="display:inline-flex;align-items:center">Email</a>
+          <a href="mailto:youremail@example.com" class="btn-ghost">Email</a>
         </div>
       </form>
 
-      <div id="formNote" style="margin-top:8px;color:var(--muted);font-size:13px;display:none">
+      <div id="formNote" class="form-note">
         Thanks — message copied to clipboard. Use your email client to complete send.
       </div>
     </div>
 
     <!-- Location / Resume Card -->
-    <div class="card" style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+    <div class="card contact-info">
       <div>
         <strong>Location</strong>
-        <div style="color:var(--muted);margin-top:6px">Nigeria</div>
+        <div class="muted">Nigeria</div>
       </div>
-      <div style="margin-top:8px">
+
+      <div>
         <strong>Open to</strong>
-        <div style="color:var(--muted);margin-top:6px">Mentorship · Research collaboration · Consulting</div>
+        <div class="muted">Mentorship · Research collaboration · Consulting</div>
       </div>
-      <div style="margin-top:8px">
+
+      <div>
         <strong>Resume</strong>
-        <div style="margin-top:6px">
-          <a href="#" style="color:var(--accent)">Download CV (placeholder)</a>
-        </div>
+        <div><a href="#" style="color:var(--accent)">Download CV (placeholder)</a></div>
       </div>
     </div>
   </div>
 </section>
+
 
 
 
