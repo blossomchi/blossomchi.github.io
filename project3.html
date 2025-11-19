@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>House Price Prediction — Blossom Oyem</title>
+  <meta name="description" content="Linear regression model + Streamlit deployment using Bengaluru House dataset for interactive price estimation."/>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="blossom.ico">
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, var(--bg) 0%, #08101a 100%);
+      color:#e6eef6;
+      line-height:1.6;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 28px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      position:sticky;
+      top:0;
+      background: linear-gradient(180deg, rgba(15,23,36,0.95) 0%, rgba(8,16,26,0.9) 100%);
+      backdrop-filter:blur(10px);
+      z-index:10;
+    }
+
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,#06b6d4,#3b82f6);
+      display:flex;justify-content:center;align-items:center;
+      font-weight:800;font-size:18px;color:#021124;
+    }
+
+    nav{display:flex;gap:18px}
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,0.06);
+      padding:8px 12px;border-radius:8px;
+      color:var(--muted);font-weight:600;font-size:14px;
+    }
+
+    .section-title{
+      font-size:32px;font-weight:800;margin-top:32px;
+      margin-bottom:10px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(2,6,12,0.6);
+      margin-top:20px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.05);
+      margin-right:8px;
+      color:var(--muted);
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+    .gallery-grid img{
+      width:100%;
+      height:240px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    footer{
+      margin-top:40px;
+      padding:16px 0;
+      border-top:1px solid rgba(255,255,255,0.05);
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="logo">B</div>
+        <div>
+          <div style="font-weight:800">Coding with Blossom</div>
+          <div style="font-size:13px;color:var(--muted)">Machine Learning Engineer · Robotics · Full-stack Developer</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html#projects" class="btn-ghost">Back to Projects</a>
+        <a href="index.html" class="btn-ghost">Home</a>
+      </nav>
+    </header>
+
+    <!-- TITLE -->
+    <h1 class="section-title">House Price Prediction Project</h1>
+    <p style="color:var(--muted);font-size:15px;margin-top:-8px;">
+      Linear regression model + Streamlit app using Bengaluru dataset for interactive price estimation.
+    </p>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+
+      <h2 style="margin-top:0;">Project Overview</h2>
+      <p>
+        This Machine Learning project predicts house prices using the 
+        <strong>Bengaluru House Dataset</strong>.  
+        Users can enter values such as square footage, number of bedrooms, and location 
+        through a Streamlit interface, and the system returns an estimated price.
+      </p>
+
+      <!-- IMAGE GALLERY -->
+      <h3>Image Gallery</h3>
+      <p style="margin-top:-6px;color:var(--muted)">Screenshots of the Streamlit application:</p>
+
+      <div class="gallery-grid">
+        <img src="house1.png" alt="House Price Prediction App Screenshot 1">
+        <img src="house2.png" alt="House Price Prediction App Screenshot 2">
+        <img src="house3.png" alt="House Price Prediction App Screenshot 3">
+      </div>
+
+      <h3 style="margin-top:26px;">Key Features</h3>
+      <ul>
+        <li>Linear Regression model for predicting house prices</li>
+        <li>Cleaned and preprocessed Bengaluru dataset</li>
+        <li>Interactive Streamlit interface</li>
+        <li>One-hot encoded location categories</li>
+        <li>Real-time prediction output with confidence awareness</li>
+      </ul>
+
+      <h3>Technologies Used</h3>
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">Scikit-learn</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">NumPy</span>
+
+      <h3 style="margin-top:26px;">Model Building Steps</h3>
+      <ul>
+        <li><strong>Data Cleaning:</strong> Remove duplicates, drop outliers, fill missing values.</li>
+        <li><strong>Feature Engineering:</strong> One-hot encoding for locations, normalize values.</li>
+        <li><strong>Model Training:</strong> Linear Regression.</li>
+        <li><strong>Streamlit UI:</strong> User inputs → Model → Predicted price.</li>
+      </ul>
+
+      <h3 style="margin-top:22px;">Sample Code Snippet</h3>
+      <pre style="background:#00000033;padding:14px;border-radius:8px;overflow:auto;">
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv("Bengaluru_House_Data.csv")
+df = pd.get_dummies(df, drop_first=True)
+
+X = df.drop("price", axis=1)
+y = df["price"]
+
+model = LinearRegression()
+model.fit(X, y)
+
+def predict(features):
+    return model.predict([features])[0]
+      </pre>
+
+      <h3 style="margin-top:22px;">Project Outcome</h3>
+      <p>
+        The House Price Predictor helps users estimate prices instantly.  
+        It serves as a practical introduction to regression modeling, data preprocessing, 
+        and interactive machine learning app deployment.
+      </p>
+    </div>
+
+    <footer>
+      © <span id="year"></span> Chinyere Blossom Oyem
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
