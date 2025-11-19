@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>House Price Prediction — Blossom Oyem</title>
-  <meta name="description" content="Linear regression model + Streamlit deployment using Bengaluru House dataset for interactive price estimation."/>
+  <title>Fruit Classification — Blossom Oyem</title>
+  <meta name="description" content="Deep learning project using transfer learning (VGG16) for fruit image classification." />
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -85,6 +85,7 @@
       color:var(--muted);
     }
 
+    /* GALLERY */
     .gallery-grid{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -109,6 +110,7 @@
       color:var(--muted);
     }
   </style>
+
 </head>
 
 <body>
@@ -130,87 +132,103 @@
       </nav>
     </header>
 
-    <!-- TITLE -->
-    <h1 class="section-title">House Price Prediction Project</h1>
+    <!-- PROJECT TITLE -->
+    <h1 class="section-title">Fruit Classification Using Transfer Learning</h1>
     <p style="color:var(--muted);font-size:15px;margin-top:-8px;">
-      Linear regression model + Streamlit app using Bengaluru dataset for interactive price estimation.
+      Deep learning model built with VGG16 to classify fruit images efficiently with minimal training data.
     </p>
 
-    <!-- MAIN CARD -->
+    <!-- CARD -->
     <div class="card">
 
+      <!-- OVERVIEW -->
       <h2 style="margin-top:0;">Project Overview</h2>
       <p>
-        This Machine Learning project predicts house prices using the 
-        <strong>Bengaluru House Dataset</strong>.  
-        Users can enter values such as square footage, number of bedrooms, and location 
-        through a Streamlit interface, and the system returns an estimated price.
+        This project focuses on the development of a fruit classification system using 
+        <strong>transfer learning with the pre-trained VGG16 model</strong>.  
+        The model was fine-tuned on a custom fruit image dataset to classify different fruit categories 
+        while minimizing data and computation requirements.
+      </p>
+
+      <p>
+        The system achieves high accuracy by leveraging learned ImageNet features and retraining only the top layers.  
+        The project includes performance evaluation, accuracy visualization, and prediction testing on sample images.
       </p>
 
       <!-- IMAGE GALLERY -->
       <h3>Image Gallery</h3>
-      <p style="margin-top:-6px;color:var(--muted)">Screenshots of the Streamlit application:</p>
+      <p style="margin-top:-6px;color:var(--muted)">Sample predictions and classification results:</p>
 
       <div class="gallery-grid">
-        <img src="house1.png" alt="House Price Prediction App Screenshot 1">
-        <img src="house2.png" alt="House Price Prediction App Screenshot 2">
-        <img src="house3.png" alt="House Price Prediction App Screenshot 3">
+        <img src="fruit1.png" alt="Fruit Classification Result 1">
+        <img src="fruit2.png" alt="Fruit Classification Result 2">
+        <img src="fruit3.png" alt="Fruit Classification Result 3">
       </div>
 
+      <!-- FEATURES -->
       <h3 style="margin-top:26px;">Key Features</h3>
       <ul>
-        <li>Linear Regression model for predicting house prices</li>
-        <li>Cleaned and preprocessed Bengaluru dataset</li>
-        <li>Interactive Streamlit interface</li>
-        <li>One-hot encoded location categories</li>
-        <li>Real-time prediction output with confidence awareness</li>
+        <li>Transfer learning using VGG16</li>
+        <li>Fine-tuned on custom fruit dataset</li>
+        <li>High accuracy with minimal training data</li>
+        <li>Visualization of predictions on test images</li>
+        <li>Efficient classification of multiple fruit categories</li>
       </ul>
 
+      <!-- TECHNOLOGIES -->
       <h3>Technologies Used</h3>
       <span class="tag">Python</span>
-      <span class="tag">Pandas</span>
-      <span class="tag">Scikit-learn</span>
-      <span class="tag">Streamlit</span>
+      <span class="tag">TensorFlow / Keras</span>
       <span class="tag">NumPy</span>
+      <span class="tag">Transfer Learning</span>
+      <span class="tag">VGG16</span>
+      <span class="tag">Matplotlib</span>
 
-      <h3 style="margin-top:26px;">Model Building Steps</h3>
+      <!-- WORKFLOW -->
+      <h3 style="margin-top:26px;">Model Development Workflow</h3>
       <ul>
-        <li><strong>Data Cleaning:</strong> Remove duplicates, drop outliers, fill missing values.</li>
-        <li><strong>Feature Engineering:</strong> One-hot encoding for locations, normalize values.</li>
-        <li><strong>Model Training:</strong> Linear Regression.</li>
-        <li><strong>Streamlit UI:</strong> User inputs → Model → Predicted price.</li>
+        <li><strong>Dataset Preparation:</strong> Load, resize, and normalize fruit images.</li>
+        <li><strong>Transfer Learning Setup:</strong> Freeze VGG16 base layers.</li>
+        <li><strong>Fine-Tuning:</strong> Train new fully connected layers for fruit classes.</li>
+        <li><strong>Evaluation:</strong> Calculate accuracy and loss curves.</li>
+        <li><strong>Prediction Visualization:</strong> Display model predictions on test images.</li>
       </ul>
 
+      <!-- CODE -->
       <h3 style="margin-top:22px;">Sample Code Snippet</h3>
       <pre style="background:#00000033;padding:14px;border-radius:8px;overflow:auto;">
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from tensorflow.keras.applications import VGG16
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-df = pd.read_csv("Bengaluru_House_Data.csv")
-df = pd.get_dummies(df, drop_first=True)
+base_model = VGG16(weights='imagenet', include_top=False, input_shape=(224,224,3))
+base_model.trainable = False   # Freeze convolutional layers
 
-X = df.drop("price", axis=1)
-y = df["price"]
+model = Sequential([
+    base_model,
+    Flatten(),
+    Dense(256, activation='relu'),
+    Dense(5, activation='softmax')  # Example: 5 fruit classes
+])
 
-model = LinearRegression()
-model.fit(X, y)
-
-def predict(features):
-    return model.predict([features])[0]
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
       </pre>
 
+      <!-- OUTCOME -->
       <h3 style="margin-top:22px;">Project Outcome</h3>
       <p>
-        The House Price Predictor helps users estimate prices instantly.  
-        It serves as a practical introduction to regression modeling, data preprocessing, 
-        and interactive machine learning app deployment.
+        The transfer learning model achieved strong accuracy while using a small dataset.  
+        Its ability to generalize well across fruit categories makes it suitable for 
+        educational purposes and lightweight real-world applications.
       </p>
     </div>
 
+    <!-- FOOTER -->
     <footer>
       © <span id="year"></span> Chinyere Blossom Oyem
     </footer>
+
   </div>
 
   <script>
