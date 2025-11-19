@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Chatbot Project — Blossom Oyem</title>
+  <meta name="description" content="Rule-based and neural chatbot demo with Streamlit deployment and improved intent handling for teens."/>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="blossom.ico">
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, var(--bg) 0%, #08101a 100%);
+      color:#e6eef6;
+      line-height:1.6;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 28px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      position:sticky;
+      top:0;
+      background: linear-gradient(180deg, rgba(15,23,36,0.95) 0%, rgba(8,16,26,0.9) 100%);
+      backdrop-filter:blur(10px);
+      z-index:10;
+    }
+
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,#06b6d4,#3b82f6);
+      display:flex;justify-content:center;align-items:center;
+      font-weight:800;font-size:18px;color:#021124;
+    }
+
+    nav{display:flex;gap:18px}
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,0.06);
+      padding:8px 12px;border-radius:8px;
+      color:var(--muted);font-weight:600;font-size:14px;
+    }
+
+    .section-title{
+      font-size:32px;font-weight:800;margin-top:32px;
+      margin-bottom:10px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(2,6,12,0.6);
+      margin-top:20px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.05);
+      margin-right:8px;
+      color:var(--muted);
+    }
+
+    /* IMAGE GALLERY */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+    .gallery-grid img{
+      width:100%;
+      height:240px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    footer{
+      margin-top:40px;
+      padding:16px 0;
+      border-top:1px solid rgba(255,255,255,0.05);
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="logo">B</div>
+        <div>
+          <div style="font-weight:800">Coding with Blossom</div>
+          <div style="font-size:13px;color:var(--muted)">Machine Learning Engineer · Robotics · Full-stack Developer</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html#projects" class="btn-ghost">Back to Projects</a>
+        <a href="index.html" class="btn-ghost">Home</a>
+      </nav>
+    </header>
+
+    <!-- PROJECT TITLE -->
+    <h1 class="section-title">AI Chatbot Project</h1>
+    <p style="color:var(--muted);font-size:15px;margin-top:-8px;">
+      Rule-based and neural chatbot demo with Streamlit deployment and improved intent handling for teens.
+    </p>
+
+    <!-- CONTENT -->
+    <div class="card">
+
+      <!-- OVERVIEW -->
+      <h2 style="margin-top:0;">Project Overview</h2>
+      <p>
+        This AI Chatbot project was developed as a practical teaching tool for teens aged 12–18. 
+        It combines a simple rule-based chatbot with an optional neural network model to improve 
+        natural language understanding. The project was deployed using Streamlit, allowing users 
+        to test the chatbot in a friendly, web-based interface.
+      </p>
+
+      <!-- IMAGE GALLERY -->
+      <h3>Image Gallery</h3>
+      <p style="margin-top:-6px;color:var(--muted)">Screenshots of the AI Chatbot interface:</p>
+
+      <div class="gallery-grid">
+        <img src="chatbot1.jpg" alt="Chatbot Interface 1">
+        <img src="chatbot2.jpg" alt="Chatbot Interface 2">
+        <img src="chatbot3.jpg" alt="Chatbot Interface 3">
+      </div>
+
+      <!-- FEATURES -->
+      <h3 style="margin-top:26px;">Key Features</h3>
+      <ul>
+        <li>Rule-based chatbot with pattern matching</li>
+        <li>Neural intent classifier using bag-of-words or embeddings</li>
+        <li>Streamlit GUI for easy testing</li>
+        <li>Teens-friendly simplified chatbot logic</li>
+        <li>Expandable intents and responses</li>
+      </ul>
+
+      <!-- TECHNOLOGIES -->
+      <h3>Technologies Used</h3>
+      <span class="tag">Python</span>
+      <span class="tag">NLTK</span>
+      <span class="tag">TensorFlow / PyTorch</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">Rule-based NLP</span>
+
+      <!-- WORKFLOW -->
+      <h3 style="margin-top:26px;">Development Workflow</h3>
+      <ul>
+        <li><strong>Intent Design:</strong> Define intents, patterns, and responses for the chatbot.</li>
+        <li><strong>Rule-based Matching:</strong> Extract keywords and map to predefined responses.</li>
+        <li><strong>Neural Model (Optional):</strong> Build a simple classifier to detect intents.</li>
+        <li><strong>Streamlit Deployment:</strong> Design textbox interface for interactive chats.</li>
+        <li><strong>Testing & Refinement:</strong> Improve responses based on student feedback.</li>
+      </ul>
+
+      <!-- CODE SNIPPET -->
+      <h3 style="margin-top:22px;">Sample Python Snippet</h3>
+      <pre style="background:#00000033;padding:14px;border-radius:8px;overflow:auto;">
+import random
+
+responses = {
+    "greeting": ["Hello!", "Hi there!", "Nice to meet you!"],
+    "bye": ["Goodbye!", "See you later!", "Bye for now!"]
+}
+
+def get_intent(message):
+    message = message.lower()
+    if "hi" in message or "hello" in message:
+        return "greeting"
+    elif "bye" in message:
+        return "bye"
+    return "unknown"
+
+def chatbot_reply(message):
+    intent = get_intent(message)
+    if intent in responses:
+        return random.choice(responses[intent])
+    return "I'm not sure I understand. Can you rephrase?"
+      </pre>
+
+      <!-- OUTCOME -->
+      <h3 style="margin-top:22px;">Project Outcome</h3>
+      <p>
+        This project helped teens understand the fundamentals of chatbots, NLP, 
+        and intent classification. With a simple Streamlit deployment, students 
+        were able to interact with the chatbot and extend its capabilities.
+      </p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      © <span id="year"></span> Chinyere Blossom Oyem
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
