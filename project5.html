@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Firefighter Humanoid Robot — Blossom Oyem</title>
+  <meta name="description" content="Autonomous firefighter humanoid robot with flame detection, mobility system, and automated water suppression." />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="blossom.ico">
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, var(--bg) 0%, #08101a 100%);
+      color:#e6eef6;
+      line-height:1.6;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 28px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      position:sticky;
+      top:0;
+      background: linear-gradient(180deg, rgba(15,23,36,0.95) 0%, rgba(8,16,26,0.9) 100%);
+      backdrop-filter:blur(10px);
+      z-index:10;
+    }
+
+    .brand{display:flex;gap:12px;align-items:center}
+
+    .logo{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,#06b6d4,#3b82f6);
+      display:flex;justify-content:center;align-items:center;
+      font-weight:800;font-size:18px;color:#021124;
+    }
+
+    nav{display:flex;gap:18px}
+
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,0.06);
+      padding:8px 12px;
+      border-radius:8px;
+      color:var(--muted);
+      font-weight:600;
+      font-size:14px;
+    }
+
+    .section-title{
+      font-size:32px;
+      font-weight:800;
+      margin-top:32px;
+      margin-bottom:10px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(2,6,12,0.6);
+      margin-top:20px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.05);
+      margin-right:8px;
+      color:var(--muted);
+    }
+
+    /* IMAGE GALLERY */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+    .gallery-grid img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    footer{
+      margin-top:40px;
+      padding:16px 0;
+      border-top:1px solid rgba(255,255,255,0.05);
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="logo">B</div>
+        <div>
+          <div style="font-weight:800">Coding with Blossom</div>
+          <div style="font-size:13px;color:var(--muted)">Machine Learning Engineer · Robotics · Full-stack Developer</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html#projects" class="btn-ghost">Back to Projects</a>
+        <a href="index.html" class="btn-ghost">Home</a>
+      </nav>
+    </header>
+
+    <!-- TITLE -->
+    <h1 class="section-title">Firefighter Humanoid Robot</h1>
+    <p style="color:var(--muted);font-size:15px;margin-top:-8px;">
+      Autonomous firefighting robot with water suppression, flame sensing, and four-wheel mobility inspired by the 2025 Canadian wildfire crisis.
+    </p>
+
+    <!-- CARD CONTENT -->
+    <div class="card">
+
+      <h2 style="margin-top:0;">Project Overview</h2>
+      <p>
+        This project presents an <strong>autonomous firefighter humanoid robot</strong> designed to support emergency response 
+        teams in hazardous environments. Built with <strong>four wheels acting as its legs</strong>, a mounted water tank, and 
+        an automated pump–hose system, the robot detects fire and immediately deploys water without human intervention.
+      </p>
+
+      <p>
+        Equipped with navigation and flame-detection sensors, the robot is engineered to operate independently inside 
+        dangerous zones—helping reduce risks faced by human firefighters while ensuring rapid response during early 
+        fire outbreaks. The concept was inspired by the devastating <strong>2025 Canadian wildfires</strong>, which produced 
+        hazardous smoke that traveled as far as Chicago and triggered global air-quality alerts.
+      </p>
+
+      <!-- IMAGE GALLERY -->
+      <h3>Image Gallery</h3>
+      <p style="margin-top:-6px;color:var(--muted)">Photos and design concepts of the Firefighter Humanoid Robot:</p>
+
+      <div class="gallery-grid">
+        <img src="firebot1.jpeg" alt="Firefighting Robot View 1">
+        <img src="firebot2.jpeg" alt="Firefighting Robot View 2">
+        <img src="firebot3.jpeg" alt="Firefighting Robot In Action">
+      </div>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li><strong>Autonomous navigation</strong> using IR sensors and obstacle detection</li>
+        <li><strong>Four-wheel locomotion</strong> acting as robotic legs for stable movement</li>
+        <li><strong>Automatic water spray system</strong> triggered by flame detection</li>
+        <li><strong>Onboard water tank + high-pressure mini-pump</strong></li>
+        <li><strong>Fire detection</strong> using flame sensors and heat signatures</li>
+        <li>Designed for <strong>hazardous indoor and outdoor environments</strong></li>
+      </ul>
+
+      <h3>Technical Components</h3>
+      <ul>
+        <li>Microcontroller (Arduino)</li>
+        <li>Flame sensors</li>
+        <li>IR/ultrasonic navigation sensors</li>
+        <li>DC motors and motor driver</li>
+        <li>Water pump and storage tank</li>
+        <li>Flexible hose for directional water release</li>
+        <li>Rechargeable battery system</li>
+      </ul>
+
+      <h3>How It Works</h3>
+      <ol>
+        <li>Sensors constantly scan the environment for fire or obstacles.</li>
+        <li>When flames are detected, the robot halts and activates its water pump.</li>
+        <li>The hose releases water directly toward the flame source.</li>
+        <li>Navigation logic ensures the robot maintains a safe distance.</li>
+        <li>The robot continues scanning until the fire is fully suppressed.</li>
+      </ol>
+
+      <h3>Motivation</h3>
+      <p>
+        The robot was conceptually motivated by the <strong>2025 Canadian wildfires</strong>, which caused extreme air-quality deterioration 
+        across North America. The event underscored the importance of autonomous, resilient firefighting robots capable of operating 
+        in dangerous, smoke-filled environments where human entry is unsafe.
+      </p>
+
+      <h3>Applications</h3>
+      <ul>
+        <li>Indoor fire emergency response</li>
+        <li>Remote or hazardous environments</li>
+        <li>Warehouses and industrial plants</li>
+        <li>Search and rescue support</li>
+        <li>Early fire suppression in homes or offices</li>
+      </ul>
+
+      <h3>Future Improvements</h3>
+      <ul>
+        <li>Thermal imaging for advanced fire localization</li>
+        <li>Autonomous mapping (SLAM)</li>
+        <li>Remote control via mobile app</li>
+        <li>Enhanced water-targeting with servo-controlled nozzles</li>
+        <li>Integration of AI-based fire prediction models</li>
+      </ul>
+
+      <h3>Technologies Used</h3>
+      <span class="tag">Arduino</span>
+      <span class="tag">Robotics</span>
+      <span class="tag">Fire Detection</span>
+      <span class="tag">Embedded Systems</span>
+      <span class="tag">Sensors</span>
+      <span class="tag">Automation</span>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      © <span id="year"></span> Chinyere Blossom Oyem
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
