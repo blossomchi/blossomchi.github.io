@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Other Demos & Tutorials — Blossom Oyem</title>
+  <meta name="description" content="Beginner C# demos, AI tutorials, and robotics teaching materials for teens (8–16 yrs) by Blossom Oyem." />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="blossom.ico">
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+    }
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, var(--bg) 0%, #08101a 100%);
+      color:#e6eef6;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 28px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      position:sticky;
+      top:0;
+      background: linear-gradient(180deg, rgba(15,23,36,0.95) 0%, rgba(8,16,26,0.9) 100%);
+      backdrop-filter:blur(10px);
+      z-index:10;
+    }
+
+    .brand{display:flex;gap:12px;align-items:center}
+
+    .logo{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,#06b6d4,#3b82f6);
+      display:flex;justify-content:center;align-items:center;
+      font-weight:800;font-size:18px;color:#021124;
+    }
+
+    nav{display:flex;gap:18px}
+
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,0.06);
+      padding:8px 12px;
+      border-radius:8px;
+      color:var(--muted);
+      font-weight:600;
+      font-size:14px;
+    }
+
+    .section-title{
+      font-size:32px;
+      font-weight:800;
+      margin-top:32px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(2,6,12,0.6);
+      margin-top:20px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.05);
+      margin-right:8px;
+      color:var(--muted);
+    }
+
+    iframe{
+      width:100%;
+      height:420px;
+      border-radius:12px;
+      border:none;
+      margin-top:15px;
+      box-shadow:0 6px 18px rgba(2,6,12,0.5);
+    }
+
+    footer{
+      margin-top:40px;
+      padding:16px 0;
+      border-top:1px solid rgba(255,255,255,0.05);
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="logo">B</div>
+        <div>
+          <div style="font-weight:800">Coding with Blossom</div>
+          <div style="font-size:13px;color:var(--muted)">Machine Learning Engineer · Robotics · Full-stack Developer</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html#projects" class="btn-ghost">Back to Projects</a>
+        <a href="index.html" class="btn-ghost">Home</a>
+      </nav>
+    </header>
+
+
+    <!-- TITLE -->
+    <h1 class="section-title">Other Demos & Tutorials</h1>
+    <p style="color:var(--muted);font-size:15px;margin-top:-8px;">
+      Coding tutorials, beginner-friendly lessons, and AI/robotics training materials for teens (8–16 yrs).
+    </p>
+
+
+    <!-- CARD -->
+    <div class="card">
+
+      <h2 style="margin-top:0;">Project Overview</h2>
+      <p>
+        This section showcases a curated collection of <strong>C# beginner demos</strong>, <strong>machine learning tutorials</strong>, 
+        and <strong>hands-on robotics lessons</strong> developed as part of my work teaching kids and teens at the 
+        <strong>AI Annual Bootcamp</strong> and through my <strong>YouTube channel — Blossom Coding World</strong>.
+      </p>
+
+      <p>
+        Over the past several years, I have trained <strong>over 100 students</strong> in Python, robotics, DIY drones, and AI concepts,
+        designing structured materials that help young learners understand complex topics through fun, practical examples.
+      </p>
+
+      <!-- Video Section -->
+      <h3>YouTube Tutorial Demo</h3>
+      <p>Below is a featured tutorial from my YouTube channel <strong>“Blossom Coding World”</strong>:</p>
+
+      <iframe 
+        src="https://www.youtube.com/embed/BpFY-CvZb-Q" 
+        allowfullscreen>
+      </iframe>
+
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">
+        (Replace with any preferred video link from your channel)
+      </p>
+
+      <h3>Teaching Focus</h3>
+      <ul>
+        <li>Beginner to intermediate <strong>C# programming</strong></li>
+        <li><strong>Python fundamentals</strong> and AI concepts for young learners</li>
+        <li><strong>Robotics programming</strong> using Arduino and sensors</li>
+        <li><strong>Machine learning basics</strong> — classification, prediction, datasets</li>
+        <li>Visual introduction to <strong>computer vision</strong></li>
+        <li>Drone coding & safe flight basics</li>
+      </ul>
+
+      <h3>AI Annual Bootcamp Highlights</h3>
+      <ul>
+        <li>Trained teens (8–16 yrs) in hands-on robotics and AI projects</li>
+        <li>Designed beginner ML demos such as image classification and chatbots</li>
+        <li>Taught practical electronics (sensors, motors, Arduino boards)</li>
+        <li>Guided students to build small robots (line-followers, obstacle-avoidance cars)</li>
+        <li>Introduced fun AI topics like face detection and gesture recognition</li>
+      </ul>
+
+      <h3>Technologies Included</h3>
+      <span class="tag">C#</span>
+      <span class="tag">Python</span>
+      <span class="tag">Arduino</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">Robotics</span>
+      <span class="tag">Teaching</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">Beginner Tutorials</span>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+      © <span id="year"></span> Chinyere Blossom Oyem
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
