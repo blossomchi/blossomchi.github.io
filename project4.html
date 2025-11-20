@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gesture Recognition & Assistive Robot — Blossom Oyem</title>
+  <meta name="description" content="Vision-based gesture recognition and assistive robotic system using PyTorch and ResNet50 for oncology support." />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="blossom.ico">
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, var(--bg) 0%, #08101a 100%);
+      color:#e6eef6;
+      line-height:1.6;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 28px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      position:sticky;
+      top:0;
+      background: linear-gradient(180deg, rgba(15,23,36,0.95) 0%, rgba(8,16,26,0.9) 100%);
+      backdrop-filter:blur(10px);
+      z-index:10;
+    }
+
+    .brand{display:flex;gap:12px;align-items:center}
+
+    .logo{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,#06b6d4,#3b82f6);
+      display:flex;justify-content:center;align-items:center;
+      font-weight:800;font-size:18px;color:#021124;
+    }
+
+    nav{display:flex;gap:18px}
+
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,0.06);
+      padding:8px 12px;border-radius:8px;
+      color:var(--muted);font-weight:600;font-size:14px;
+    }
+
+    .section-title{
+      font-size:32px;font-weight:800;margin-top:32px;
+      margin-bottom:10px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(2,6,12,0.6);
+      margin-top:20px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.05);
+      margin-right:8px;
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:40px;
+      padding:16px 0;
+      border-top:1px solid rgba(255,255,255,0.05);
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="logo">B</div>
+        <div>
+          <div style="font-weight:800">Coding with Blossom</div>
+          <div style="font-size:13px;color:var(--muted)">Machine Learning Engineer · Robotics · Full-stack Developer</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html#projects" class="btn-ghost">Back to Projects</a>
+        <a href="index.html" class="btn-ghost">Home</a>
+      </nav>
+    </header>
+
+    <!-- TITLE -->
+    <h1 class="section-title">Gesture Recognition & Assistive Robot</h1>
+    <p style="color:var(--muted);font-size:15px;margin-top:-8px;">
+      Vision-based gesture control for a robotic arm with integrated histopathology image classification (pilot study).
+    </p>
+
+    <!-- CARD -->
+    <div class="card">
+
+      <h2 style="margin-top:0;">Project Overview</h2>
+      <p>
+        This pilot study introduces a <strong>vision-based assistive robotic system</strong> that merges 
+        real-time <strong>gesture recognition</strong> with preliminary <strong>cancer detection</strong> 
+        to support oncology workflows in resource-limited environments. A ResNet50-based model interprets hand gestures, 
+        while a second module classifies histopathology images for malignancy detection. Both tasks share a unified 
+        CNN backbone to minimize data requirements.
+      </p>
+      <p>
+        An Arduino-controlled robotic arm adjusts a medical display in response to gesture commands or diagnostic alerts, 
+        and the system sends real-time notifications to clinicians.
+      </p>
+
+      <h3>Technical Summary</h3>
+      <ul>
+        <li>Gesture recognition trained on <strong>Jester 20BN</strong> + Kaggle datasets</li>
+        <li>Histopathology classifier trained on the <strong>Breast Histopathology Images dataset</strong></li>
+        <li>Shared <strong>ResNet50</strong> backbone reduces parameters by 15%</li>
+        <li>Real-time robotic actuation controlled via Arduino</li>
+        <li>Notification system with <strong>&lt;1 second</strong> latency</li>
+      </ul>
+
+      <h3>Experimental Setup</h3>
+      <p>
+        Experiments were conducted in a simulated laboratory environment with <strong>10 volunteer participants</strong> 
+        across <strong>100 trials</strong>. The system processed:
+      </p>
+      <ul>
+        <li><strong>277,524 histopathology image patches</strong> (4× magnification)</li>
+        <li>Real-time gesture input captured through bedside cameras</li>
+        <li>Robotic arm motions including tilt, zoom, and pan</li>
+      </ul>
+
+      <h3>Results & Performance</h3>
+      <ul>
+        <li>Gesture recognition accuracy: <strong>85%</strong></li>
+        <li>Malignancy classification accuracy: <strong>94%</strong></li>
+        <li>ROC-AUC for cancer detection: <strong>0.98</strong></li>
+        <li>Gesture F1-score: <strong>0.83</strong></li>
+        <li>Precision/Recall (malignant): <strong>0.93 / 0.95</strong></li>
+        <li>Robotic actuation success rate: <strong>90%</strong></li>
+        <li>Notification delivery success: <strong>95%</strong> with mean latency of <strong>&lt;1s</strong></li>
+      </ul>
+      <p>
+        Data augmentation improved robustness, though low-light conditions reduced accuracy by 5–10%.
+      </p>
+
+      <h3>Key Contributions</h3>
+      <ul>
+        <li>A unified ResNet-based CNN supporting both gesture recognition and cancer detection</li>
+        <li>Gesture-controlled real-time HRI with physical robotic actuation</li>
+        <li>Integrated diagnostic feedback + clinician alerts</li>
+        <li>Feasibility benchmarks demonstrating operability in resource-constrained scenarios</li>
+      </ul>
+
+      <h3>Conclusion</h3>
+      <p>
+        This work provides a <strong>proof-of-concept</strong> for an AI-augmented assistive robotic system targeting 
+        oncology support. The pilot demonstrates strong technical feasibility with competitive performance across 
+        gesture recognition and cancer detection components.
+      </p>
+
+      <h3>Future Work</h3>
+      <ul>
+        <li>IRB-approved clinical trials with oncology specialists</li>
+        <li>Multi-modal interaction (gesture + voice)</li>
+        <li>Diverse multi-ethnic histopathology datasets</li>
+        <li>Deployment in rural tele-oncology hubs</li>
+      </ul>
+
+      <!-- TECHNOLOGIES -->
+      <h3>Technologies Used</h3>
+      <span class="tag">PyTorch</span>
+      <span class="tag">ResNet50</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">Robotics</span>
+      <span class="tag">Arduino</span>
+      <span class="tag">CNN</span>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      © <span id="year"></span> Chinyere Blossom Oyem
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
