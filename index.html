@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chinyere Blossom Oyem | Assistive and autonomous robotic systems</title>
+<meta name="description" content="Chinyere Blossom Oyem is a machine learning engineer and roboticist in Nigeria working on assistive robots for cancer care, firefighting robots and low-cost search-and-rescue planning.">
+<link rel="canonical" href="https://blossomchi.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chinyere Blossom Oyem | Assistive and autonomous robotic systems">
+<meta property="og:description" content="Chinyere Blossom Oyem is a machine learning engineer and roboticist in Nigeria working on assistive robots for cancer care, firefighting robots and low-cost search-and-rescue planning.">
+<meta property="og:url" content="https://blossomchi.github.io/">
+<meta property="og:image" content="https://blossomchi.github.io/img/portrait.jpg">
+<meta name="theme-color" content="#0B1F3A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08111F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="blossom.ico">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Chinyere Blossom Oyem",
+ "jobTitle":"Machine learning engineer and robotics researcher",
+ "worksFor":{"@type":"Organization","name":"Rolof Institute of Management and Technology"},
+ "alumniOf":{"@type":"CollegeOrUniversity","name":"Benson Idahosa University"},
+ "address":{"@type":"PostalAddress","addressRegion":"Delta State","addressCountry":"NG"},
+ "email":"mailto:chiblossoyem@gmail.com",
+ "url":"https://blossomchi.github.io/",
+ "sameAs":["https://github.com/blossomchi","https://www.youtube.com/@BlossomCodingWorld"]}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="rail">
+    <a class="id" href="#top">
+      <img src="img/portrait.jpg" alt="Portrait of Chinyere Blossom Oyem" width="108" height="108">
+      <strong>Chinyere Blossom Oyem</strong>
+      <span>Machine learning engineer and roboticist, Delta State, Nigeria</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#builds">Other builds</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#background">Background</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <ul class="rail-links">
+      <li><a href="mailto:chiblossoyem@gmail.com">Email</a></li>
+      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV (PDF)</a></li>
+      <li><a href="https://github.com/blossomchi" rel="noopener">GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a></li>
+      <li><a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube: Blossom Coding World</a></li>
+    </ul>
+  </aside>
+  <main class="main" id="main">
+
+    <div class="wrap">
+    <section class="hero" id="top">
+      <h1>Building <span class="hl nb">assistive &amp; autonomous</span> robotic systems for real-world impact</h1>
+      <p class="lede">I'm Chinyere Blossom Oyem, a machine learning engineer and roboticist in Delta State, Nigeria, and Head of ICT at Rolof Institute of Management and Technology. My current research covers an assistive arm for speech-impaired cancer patients, a firefighting robot designed to re-aim when its first spray does not work, and a search-and-rescue planner for microcontroller-class robots.</p>
+      <p class="hero-status">Two papers accepted, two under review, one in preparation. <a href="#publications">See the publications</a>.</p>
+
+      <figure class="loop">
+        <div class="loop-return" aria-hidden="true"><span>each result feeds the next reading</span></div>
+        <p class="loop-note">Each result feeds the next reading.</p>
+        <ol class="loop-steps">
+          <li><h3>Perceive</h3><p>Cameras and low-cost sensors read the scene.</p></li>
+          <li><h3>Decide</h3><p>Models weigh the evidence and choose a target or a task.</p></li>
+          <li><h3>Act</h3><p>Servos, pumps and wheels carry the decision out.</p></li>
+          <li class="check"><h3>Check</h3><p>Did it work? Re-aim, re-plan or alert a clinician.</p></li>
+        </ol>
+        <figcaption>The same cycle runs through the three research projects below.</figcaption>
+      </figure>
+    </section>
+    
+    <section id="research">
+      <h2>Research</h2>
+      <p class="sec-intro">Three systems that perceive, decide, act and then check the result. Each project page separates what has been measured from what is still planned.</p>
+
+      <article class="study">
+        <span class="status accepted">Accepted</span>
+        <h3><a href="project4.html">Gesture-controlled assistive arm for speech-impaired cancer patients</a></h3>
+        <p>A bedside webcam reads three gestures (zoom, pan, highlight) and an Arduino-controlled arm repositions a medical display. The same network, CDAM-Net, screens histopathology patches and posts results to a clinician dashboard. It shares one ResNet50 backbone between two very different kinds of image and adapts features per task to avoid negative transfer.</p>
+        <dl class="facts">
+          <dt>Papers</dt><dd>Pilot study in the FNAS Journal of Computing and Applications; extended CDAM-Net paper at ICARM 2026, held at the University of Évry Paris-Saclay, France.</dd>
+          <dt>Evidence</dt><dd>85.0% gesture accuracy, 94.0% patch classification accuracy and 0.82 s mean latency across 100 trials with 10 healthy volunteers.</dd>
+          <dt>Scope</dt><dd>Laboratory simulation. No patients yet; clinical validation is the next step.</dd>
+        </dl>
+        <a class="more" href="project4.html">Read the project page</a>
+      </article>
+
+      <article class="study">
+        <span class="status review">Under review</span>
+        <h3><a href="project5.html">Firefighting robot that checks whether its own spray worked</a></h3>
+        <p>A wheeled base carries a humanoid-inspired pan/tilt upper body that aims the hose. Camera, flame, heat, gas, distance, motion and water-flow readings are fused with reliability weights. After each spray the robot compares flame, heat and gas readings, and if the fire is not responding it re-selects the target and re-aims instead of spraying blindly.</p>
+        <dl class="facts">
+          <dt>Papers</dt><dd>Submitted to four conferences: SCA 2026, ICRA 2027, ACDSA 2027 and CSAI Days 2026.</dd>
+          <dt>Evidence</dt><dd>A design and an evaluation protocol. The subsystems are built and being integrated; field-trial results are not reported yet.</dd>
+          <dt>Hardware</dt><dd>Raspberry Pi 5, Arduino Uno and off-the-shelf sensors.</dd>
+        </dl>
+        <a class="more" href="project5.html">Read the project page</a>
+      </article>
+
+      <article class="study">
+        <span class="status review">Under review</span>
+        <h3><a href="project7.html">Search-and-rescue planner for microcontroller-class robots</a></h3>
+        <p>With only ultrasonic, motion, temperature, gas and inertial sensors, an ESP32 robot has to decide where to search next and which sensor is worth the battery. A Search Priority Score combines victim likelihood, hazard, navigation risk, distance and remaining charge, and an active-sensing rule spends energy only where the evidence is ambiguous.</p>
+        <dl class="facts">
+          <dt>Papers</dt><dd>Submitted to four conferences: SCA 2026, ICRA 2027, ACDSA 2027 and CSAI Days 2026.</dd>
+          <dt>Evidence</dt><dd>Simulation, 300 episodes per policy in each of six scenarios. Energy per verified detection fell by roughly 30 to 41% against always-sample fusion, and mission success on a 30% battery was 61% against 0% for the baselines. Detection rate was lower than static fusion (0.602 against 0.670).</dd>
+          <dt>Scope</dt><dd>The platform has not been assembled yet. Results come from a documented synthetic sensor model.</dd>
+        </dl>
+        <a class="more" href="project7.html">Read the project page</a>
+      </article>
+    </section>
+    
+    <section id="publications">
+      <h2>Publications</h2>
+      <p class="sec-intro">Listed by status, as of September 2026.</p>
+
+      <div class="pub-group">
+        <h3><span class="status accepted">Accepted</span></h3>
+        <ul class="pubs">
+          <li class="pub">
+            <h4 class="pub-title"><a href="project4.html">A Vision-Based Assistive Robotic System with Real-Time Gesture Recognition for Communication Support in Speech-Impaired Cancer Patients: A Pilot Feasibility Study</a></h4>
+            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, D. V. Ojie, B. E. Iyamah, C. S. Chiemeke</p>
+            <p class="venue">Faculty of Natural and Applied Sciences Journal of Computing and Applications, vol. 3, no. 1, March 2026.</p>
+            <p class="kind">Journal article &middot; <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=uftesUcAAAAJ&citation_for_view=uftesUcAAAAJ:u5HHmVD_uO8C" rel="noopener">View on Google Scholar</a></p>
+          </li>
+          <li class="pub">
+            <h4 class="pub-title"><a href="project4.html">Vision-Based Assistive Robotic System with Real-Time Gesture Recognition and Cross-Domain Adaptive Learning for Communication Support in Speech-Impaired Cancer Patients</a></h4>
+            <p class="authors"><strong>C. B. Oyem</strong></p>
+            <p class="venue">2026 International Conference on Advanced Robotics and Mechatronics (ICARM 2026), University of Évry Paris-Saclay, France, 21 to 23 July 2026.</p>
+            <p class="kind">Conference paper</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pub-group">
+        <h3><span class="status review">Under review</span></h3>
+        <ul class="pubs">
+          <li class="pub">
+            <h4 class="pub-title"><a href="project5.html">An Edge-AI Humanoid Firefighting Robot with Risk-Adaptive Multisensor Perception and Suppression-Outcome Feedback for Smart-Building Disaster Response</a></h4>
+            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, C. S. Chiemeke</p>
+            <p class="venue">Submitted to four conferences: SCA 2026 (11th International Conference on Smart Cities &amp; Applications), ICRA 2027 (2027 IEEE International Conference on Robotics and Automation), ACDSA 2027 (International Conference on Artificial Intelligence, Computer, Data Sciences, and Applications) and CSAI Days 2026 (International Conference on Cybersecurity &amp; Artificial Intelligence).</p>
+            <p class="kind">Conference paper</p>
+          </li>
+          <li class="pub">
+            <h4 class="pub-title"><a href="project7.html">Active, Risk-Aware Multimodal Search for Resource-Constrained Autonomous Search-and-Rescue Robots</a></h4>
+            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, C. S. Chiemeke</p>
+            <p class="venue">Submitted to four conferences: SCA 2026 (11th International Conference on Smart Cities &amp; Applications), ICRA 2027 (2027 IEEE International Conference on Robotics and Automation), ACDSA 2027 (International Conference on Artificial Intelligence, Computer, Data Sciences, and Applications) and CSAI Days 2026 (International Conference on Cybersecurity &amp; Artificial Intelligence).</p>
+            <p class="kind">Conference paper</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pub-group">
+        <h3><span class="status">In preparation</span></h3>
+        <ul class="pubs">
+          <li class="pub">
+            <h4 class="pub-title">Risk-Aware Human-Robot Coordination for Emergency Search and Rescue</h4>
+            <p class="venue">HRI 2027 Student Design Competition.</p>
+            <p class="kind">Design competition entry</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    
+    <section id="builds">
+      <h2>Other builds</h2>
+      <p class="sec-intro">Earlier projects, mostly built for teaching and small deployments.</p>
+      <div class="builds">
+        <article class="build">
+          <img src="img/smartbin3.jpg" alt="Smart bin prototype with its lid open" loading="lazy">
+          <h3><a href="project2.html">Smart bin</a></h3>
+          <p>A hands-free waste bin built with Arduino, an ultrasonic sensor and a servo-driven lid, developed with the waterfall model.</p>
+        </article>
+        <article class="build">
+          <img src="img/fruit1.jpg" alt="Fruit classification demo predicting an apple" loading="lazy" style="object-position:50% 12%">
+          <h3><a href="project3.html">Fruit classification with transfer learning</a></h3>
+          <p>A VGG16 model fine-tuned to recognise fruit photos from a small dataset.</p>
+        </article>
+        <article class="build">
+          <img src="img/chatbot3.jpg" alt="Chatbot demo answering a question about Nigeria" loading="lazy">
+          <h3><a href="project1.html">AI chatbot</a></h3>
+          <p>A rule-based and neural chatbot with a Streamlit interface, made as a teaching demo for teens.</p>
+        </article>
+        <article class="build">
+          <img src="img/flyer2.jpg" alt="Flyer for the Weekend AI and Robotics Academy" loading="lazy" style="object-position:50% 0">
+          <h3><a href="project6.html">Tutorials and teaching materials</a></h3>
+          <p>C#, Python, Arduino and machine learning lessons for teens and kids, with programme flyers.</p>
+        </article>
+      </div>
+      <h3 class="sub">More robotics builds</h3>
+      <p>Smart home automation with Arduino and IoT sensors, a smart estate management system, an obstacle-avoidance car with infrared and line-tracking sensors, a Bluetooth-controlled car, a servo-driven robotic arm and an automatic plant irrigation system.</p>
+    </section>
+    
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <p class="sec-intro">Boot camps, courses and online tutorials, from first lines of code to drone piloting.</p>
+      <p>Since 2019 I have coordinated an AI boot camp for teens and kids at Rolof Computer Academy in Warri. I have trained more than 100 students in Python and in DIY drone assembly and piloting. As College Registrar I also teach Arduino robotics, programming, databases, systems analysis and data security, and my YouTube channel, <a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">Blossom Coding World</a>, covers coding from beginner to professional level.</p>
+      <p>Courses taught: computer basics, VB.NET, SQL, PL/SQL, software project management, scientific programming in C#, systems analysis and design, Arduino, Python, UML and data security.</p>
+      <h3 class="sub">Student projects supervised</h3>
+      <ul class="plain">
+        <li>Automatic timetable generator for Rolof Computer Academy <span>(2018/2019)</span></li>
+        <li>Facial emotion detection and recognition system <span>(2020/2021)</span></li>
+        <li>Online hotel booking system <span>(2022/2023)</span></li>
+        <li>Food ordering system <span>(2022/2023)</span></li>
+        <li>Real estate website <span>(2022/2023)</span></li>
+      </ul>
+    </section>
+    
+    <section id="background">
+      <h2>Background</h2>
+      <p class="sec-intro">Over ten years in software development, six of them in robotics.</p>
+      <ul class="timeline">
+        <li><span class="when">Current</span><div><strong>Head of ICT</strong><p>Rolof Institute of Management and Technology, Delta State</p></div></li>
+        <li><span class="when">2022 to 2025</span><div><strong>General Manager, Information Technology</strong><p>Rolof Computers Limited, now Rolof IMT Store, Warri. Previously Assistant General Manager, Information Technology (2016 to 2020).</p></div></li>
+        <li><span class="when">2018 to 2025</span><div><strong>College Registrar and lecturer</strong><p>Rolof Computer Academy, Warri. Also Moodle learning management coordinator (2022 to present).</p></div></li>
+        <li><span class="when">2014 to present</span><div><strong>Backend developer, drone specialist and robotics lead</strong><p>Rolof Computers Limited, now Rolof IMT Store, and Rolof Computer Academy, now Rolof Institute of Management and Technology. Delivered point-of-sale, school, hospital, grading, church and payroll management systems in C#, VB.NET and Python.</p></div></li>
+        <li><span class="when">2010 to 2012</span><div><strong>IT desktop analyst (volunteer)</strong><p>Shell Petroleum Development Company, Warri. Supported about 3,000 desktops and Windows file and print servers.</p></div></li>
+        <li><span class="when">2010</span><div><strong>BSc, Information and Computer Systems</strong><p>Benson Idahosa University, Benin City</p></div></li>
+      </ul>
+      <h3 class="sub">Skills</h3>
+      <dl class="facts">
+        <dt>Languages</dt><dd>Python (advanced), C#, VB.NET, SQL, PL/SQL, Arduino</dd>
+        <dt>ML and vision</dt><dd>PyTorch, TensorFlow, Keras, scikit-learn, OpenCV, NumPy, pandas, Matplotlib</dd>
+        <dt>Robotics</dt><dd>Sensor integration, robotic cars and arms, home automation, drone piloting and coding</dd>
+        <dt>Web</dt><dd>HTML, CSS, JavaScript, ASP.NET, Flask, Streamlit</dd>
+      </dl>
+    </section>
+    
+    <section id="credentials">
+      <h2>Credentials</h2>
+      <p class="sec-intro">Professional memberships and certifications.</p>
+      <div class="certs">
+        <div>
+          <img src="img/naaip.jpg" alt="Certificate of charter membership, National Association of Artificial Intelligence Practitioners" loading="lazy">
+          <h3>National Association of Artificial Intelligence Practitioners (NAAIP)</h3>
+          <p>Charter Member no. 858, inducted 6 May 2024.</p>
+        </div>
+        <div>
+          <img src="img/acsp.jpg" alt="Certificate of charter membership, Association of Cybersecurity Practitioners" loading="lazy">
+          <h3>Association of Cybersecurity Practitioners (ACSP)</h3>
+          <p>Charter Member no. 600, inducted 6 August 2025.</p>
+        </div>
+      </div>
+      <h3 class="sub">IBM Skills Network badges, through Coursera</h3>
+      <ul class="badges">
+        <li><img src="img/ibm-ml-python.png" alt="IBM badge: Machine Learning with Python" loading="lazy"></li>
+        <li><img src="img/ibm-dl-keras.png" alt="IBM badge: Deep Learning Essentials with Keras" loading="lazy"></li>
+        <li><img src="img/ibm-cv-essentials.png" alt="IBM badge: Computer Vision and Image Processing Essentials" loading="lazy"></li>
+        <li><img src="img/ibm-adv-dl.png" alt="IBM badge: Advanced Deep Learning Specialist" loading="lazy"></li>
+      </ul>
+      <h3 class="sub">Other training</h3>
+      <ul class="plain">
+        <li>IBM Deep Learning with Keras and TensorFlow <span>(2025)</span></li>
+        <li>Virtual Institute Capacity Building Higher Education: Basics of Cybersecurity <span>(2025)</span>, A, B, C of Artificial Intelligence <span>(2024)</span>, Quality Assurance in Higher Education <span>(2023)</span></li>
+        <li>Udemy: programming fundamentals, Python OOP, data structures and algorithms, UML, machine learning and deep learning <span>(2023)</span></li>
+        <li>Microsoft Certified IT Professional, through NIIT <span>(2013)</span></li>
+      </ul>
+    </section>
+    
+    <section id="contact">
+      <div class="panel">
+      <h2>Contact</h2>
+      <p class="sec-intro">Open to research collaboration, mentoring and consulting, especially on assistive and emergency-response robotics for low-resource settings.</p>
+      <a class="mail" href="mailto:chiblossoyem@gmail.com">chiblossoyem@gmail.com</a>
+      <div class="btnrow">
+        <a class="btn" href="Chinyere_Blossom_Oyem_CV.pdf">Download CV</a>
+        <a class="btn alt" href="https://github.com/blossomchi" rel="noopener">GitHub</a>
+        <a class="btn alt" href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a>
+        <a class="btn alt" href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube</a>
+      </div>
+      <p>Based in Delta State, Nigeria.</p>
+      </div>
+    </section>
+    </div>
+
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+  </main>
+</div>
+<script src="site.js" defer></script>
+</body>
+</html>

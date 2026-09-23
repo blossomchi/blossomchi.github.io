@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search-and-rescue planner for microcontroller-class robots | Chinyere Blossom Oyem</title>
+<meta name="description" content="Active, risk-aware multimodal search on an ESP32 robot, evaluated in simulation. Under review.">
+<link rel="canonical" href="https://blossomchi.github.io/project7.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Search-and-rescue planner for microcontroller-class robots | Chinyere Blossom Oyem">
+<meta property="og:description" content="Active, risk-aware multimodal search on an ESP32 robot, evaluated in simulation. Under review.">
+<meta property="og:url" content="https://blossomchi.github.io/project7.html">
+<meta property="og:image" content="https://blossomchi.github.io/img/portrait.jpg">
+<meta name="theme-color" content="#0B1F3A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08111F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="blossom.ico">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="rail">
+    <a class="id" href="index.html">
+      <img src="img/portrait.jpg" alt="Portrait of Chinyere Blossom Oyem" width="108" height="108">
+      <strong>Chinyere Blossom Oyem</strong>
+      <span>Machine learning engineer and roboticist, Delta State, Nigeria</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="index.html#research">Research</a>
+      <a href="index.html#publications">Publications</a>
+      <a href="index.html#builds">Other builds</a>
+      <a href="index.html#teaching">Teaching</a>
+      <a href="index.html#background">Background</a>
+      <a href="index.html#credentials">Credentials</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <ul class="rail-links">
+      <li><a href="mailto:chiblossoyem@gmail.com">Email</a></li>
+      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV (PDF)</a></li>
+      <li><a href="https://github.com/blossomchi" rel="noopener">GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a></li>
+      <li><a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube: Blossom Coding World</a></li>
+    </ul>
+  </aside>
+  <main class="main" id="main">
+
+    <div class="wrap article">
+      <p class="crumb"><a href="index.html">Home</a> / <a href="index.html#research">Research</a></p>
+      <header class="pagehead">
+        <h1>Search-and-rescue planner for microcontroller-class robots</h1>
+        <div class="status-row"><span class="status review">Under review at four conferences</span></div>
+        <p class="dek">A low-cost ground robot decides where to search next and which of its cheap, unreliable sensors is worth spending battery on.</p>
+      </header>
+
+      <div class="note"><p><strong>Scope.</strong> The results below come from a stochastic simulation of the decision logic, using documented synthetic sensor models with a fixed random seed. The ESP32 platform has not been assembled, so no hardware timing, energy or detection results are claimed. Expect the numbers to shift once real sensor noise replaces the modelling assumptions.</p></div>
+
+      <h2>The question</h2>
+      <p>Most search-and-rescue robots assume LiDAR mapping, depth cameras or a team of robots on a reliable link. A robot built from a handful of cheap sensors has none of that: no dense map, little computing power, a small battery, and sensors that are individually unreliable. A passive infrared sensor fires on a curtain moving in a draught, and a temperature reading cannot tell a person from a warm pipe. The question is not whether such a robot can explore, but how it should prioritise where to look and when to trust a detection while watching hazard, navigation risk and remaining charge.</p>
+
+      <h2>The method</h2>
+      <p>Victim likelihood for each candidate region is a weighted mix of the passive-infrared and temperature cues. The weights were calibrated on held-out episodes, not assumed, and came out at 0.10 for motion and 0.90 for temperature.</p>
+      <p>The robot picks its next region with a Search Priority Score:</p>
+      <div class="eq" role="math" aria-label="P sub i of t equals alpha of B times V sub i minus beta times H sub i minus gamma times R sub i minus delta of B times D sub i">P<sub>i</sub>(t) = &alpha;(B<sub>t</sub>)&middot;V<sub>i</sub> &minus; &beta;&middot;H<sub>i</sub> &minus; &gamma;&middot;R<sub>i</sub> &minus; &delta;(B<sub>t</sub>)&middot;D<sub>i</sub></div>
+      <p>Here V is victim likelihood, H hazard from gas and heat, R navigation risk from ultrasonic and tilt readings, D travel distance and B the battery remaining. The two battery-dependent weights are smooth logistic curves, so early in a mission the robot favours coverage and late in a mission it favours confirmed leads and a safe return.</p>
+      <p>When the evidence for a region is ambiguous, the robot does not sample every sensor. It picks the single action, such as re-reading one sensor or moving 0.5 m closer, with the best information-to-cost ratio:</p>
+      <div class="eq" role="math" aria-label="A of a equals information gain times relevance divided by energy cost plus lambda times risk">A(a) = IG(a)&middot;Rel(a) / [ E<sub>cost</sub>(a) + &lambda;&middot;Risk(a) ]</div>
+      <ol class="flow">
+        <li><strong>Sense</strong><span>Read the cheap, always-on sensors: motion, ultrasonic, tilt.</span></li>
+        <li><strong>Score regions</strong><span>Compute the Search Priority Score for every candidate region.</span></li>
+        <li><strong>Travel</strong><span>Head for the highest-scoring region and re-plan around obstacles.</span></li>
+        <li><strong>Resolve doubt</strong><span>If the evidence is ambiguous, take the one cheapest useful sensing action, repeatedly, within a budget.</span></li>
+        <li><strong>Verify or reject</strong><span>Log a verified candidate location for human checking, or drop the lead.</span></li>
+        <li><strong>Re-plan</strong><span>Update the battery estimate and return to base when the reserve is reached.</span></li>
+      </ol>
+
+      <h2>Planned hardware</h2>
+      <p>An ESP32 DevKit with a sensor shield, one HC-SR501 motion sensor, three HC-SR04 ultrasonic sensors, an MLX90614 infrared thermometer, an MQ-2 gas sensor, an MPU6050 inertial unit and a battery-voltage module, driving four DC motors through an L298N on a four-wheel chassis. There is no camera and no GPU, so the whole bill of materials stays within reach of a student or volunteer team.</p>
+
+      <h2>Simulation results</h2>
+      <p>Four policies were each run for 300 episodes in six scenarios: open layout, obstacles, multiple victims, distractors that trigger sensors without a victim, a battery capped at 30%, and an obstacle appearing mid-mission.</p>
+      <div class="tablewrap">
+        <table class="data">
+          <caption>Pooled across all six scenarios (1,800 episodes per policy). Distance and energy are in relative units.</caption>
+          <thead><tr><th>Policy</th><th class="num">Detection rate</th><th class="num">False positives</th><th class="num">Coverage</th><th class="num">Distance</th><th class="num">Energy per detection</th></tr></thead>
+          <tbody>
+            <tr><td>Random</td><td class="num">0.627</td><td class="num">0.108</td><td class="num">0.939</td><td class="num">67.4</td><td class="num">309.5</td></tr>
+            <tr><td>Frontier</td><td class="num">0.696</td><td class="num">0.113</td><td class="num">0.993</td><td class="num">37.7</td><td class="num">216.6</td></tr>
+            <tr><td>Static fusion</td><td class="num">0.670</td><td class="num">0.104</td><td class="num">0.992</td><td class="num">41.0</td><td class="num">225.6</td></tr>
+            <tr class="hl"><td>Active (proposed)</td><td class="num">0.602</td><td class="num">0.034</td><td class="num">1.000</td><td class="num">43.0</td><td class="num">156.2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table class="data">
+          <caption>Scenario E: battery capped at 30% (300 episodes per policy).</caption>
+          <thead><tr><th>Policy</th><th class="num">Mission success</th><th class="num">Stranded</th></tr></thead>
+          <tbody>
+            <tr><td>Random</td><td class="num">0%</td><td class="num">100%</td></tr>
+            <tr><td>Frontier</td><td class="num">0%</td><td class="num">100%</td></tr>
+            <tr><td>Static fusion</td><td class="num">0%</td><td class="num">100%</td></tr>
+            <tr class="hl"><td>Active (proposed)</td><td class="num">61%</td><td class="num">2.3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What worked</h3>
+      <ul>
+        <li>Active sensing cut energy per verified detection by roughly 30 to 41% against always-sample fusion, in every scenario (Welch's t-test, p &lt; 0.0001).</li>
+        <li>False positives fell from 0.104 to 0.034, and in the distractor scenario from 0.53 to 0.17 per episode.</li>
+        <li>Battery-aware weighting made the difference in the capped-battery scenario, where the other three policies ran out of charge on every run.</li>
+      </ul>
+      <h3>What did not</h3>
+      <ul>
+        <li>Active sensing has a lower detection rate (0.602) than static fusion (0.670). It treats a weak motion reading as a confident &ldquo;no&rdquo; and skips the temperature check, so roughly one in five victims with a weak motion signature is never checked. In search and rescue those are exactly the victims who are unconscious or pinned, so the paper reports this as a real design trade-off, not a win. The planned fix is to require at least one temperature sample per region.</li>
+        <li>The hazard cross-check mattered less than expected. Removing it moved false positives only from 0.034 to 0.042, because most of the false-positive suppression comes from the motion-first gating.</li>
+        <li>Fusing motion and temperature barely beat temperature alone in this model (F1 0.817 against 0.813).</li>
+      </ul>
+
+      <h2>Next steps</h2>
+      <p>Assemble the platform and validate on hardware, revise the sensing rule to protect recall for low-motion victims, add a camera cue, learn the fusion weights online, and test outdoors with a search-and-rescue partner. A related design entry, <em>Risk-Aware Human-Robot Coordination for Emergency Search and Rescue</em>, is in preparation for the HRI 2027 Student Design Competition.</p>
+
+      <h2>Paper</h2>
+      <ul class="related">
+        <li>Okpako, A. E., Oyem, C. B., &amp; Chiemeke, C. S. <em>Active, Risk-Aware Multimodal Search for Resource-Constrained Autonomous Search-and-Rescue Robots.</em> Submitted to four conferences: SCA 2026 (11th International Conference on Smart Cities &amp; Applications), ICRA 2027 (2027 IEEE International Conference on Robotics and Automation), ACDSA 2027 (International Conference on Artificial Intelligence, Computer, Data Sciences, and Applications) and CSAI Days 2026 (International Conference on Cybersecurity &amp; Artificial Intelligence). Under review.</li>
+      </ul>
+      <ul class="tags"><li>ESP32</li><li>Active sensing</li><li>Risk-aware planning</li><li>Sensor fusion</li><li>Energy-aware robotics</li><li>Simulation</li></ul>
+      <div class="pager"><a href="index.html#research">Back to the home page</a><a href="index.html#publications">All publications</a></div>
+    </div>
+
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+  </main>
+</div>
+<script src="site.js" defer></script>
+</body>
+</html>

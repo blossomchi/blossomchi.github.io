@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fruit classification with transfer learning | Chinyere Blossom Oyem</title>
+<meta name="description" content="VGG16 transfer learning for classifying fruit images from a small dataset.">
+<link rel="canonical" href="https://blossomchi.github.io/project3.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fruit classification with transfer learning | Chinyere Blossom Oyem">
+<meta property="og:description" content="VGG16 transfer learning for classifying fruit images from a small dataset.">
+<meta property="og:url" content="https://blossomchi.github.io/project3.html">
+<meta property="og:image" content="https://blossomchi.github.io/img/portrait.jpg">
+<meta name="theme-color" content="#0B1F3A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08111F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="blossom.ico">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="rail">
+    <a class="id" href="index.html">
+      <img src="img/portrait.jpg" alt="Portrait of Chinyere Blossom Oyem" width="108" height="108">
+      <strong>Chinyere Blossom Oyem</strong>
+      <span>Machine learning engineer and roboticist, Delta State, Nigeria</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="index.html#research">Research</a>
+      <a href="index.html#publications">Publications</a>
+      <a href="index.html#builds">Other builds</a>
+      <a href="index.html#teaching">Teaching</a>
+      <a href="index.html#background">Background</a>
+      <a href="index.html#credentials">Credentials</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <ul class="rail-links">
+      <li><a href="mailto:chiblossoyem@gmail.com">Email</a></li>
+      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV (PDF)</a></li>
+      <li><a href="https://github.com/blossomchi" rel="noopener">GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a></li>
+      <li><a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube: Blossom Coding World</a></li>
+    </ul>
+  </aside>
+  <main class="main" id="main">
+
+    <div class="wrap article">
+      <p class="crumb"><a href="index.html">Home</a> / <a href="index.html#builds">Other builds</a></p>
+      <header class="pagehead">
+        <h1>Fruit classification with transfer learning</h1>
+        
+        <p class="dek">A VGG16 model fine-tuned to classify fruit images accurately from a small dataset.</p>
+      </header>
+
+      <h2>Overview</h2>
+      <p>This project applies transfer learning with the pre-trained VGG16 network. It keeps the ImageNet features from the convolutional layers and trains only new top layers on a custom fruit dataset, which keeps data and computing needs low. It includes accuracy evaluation, loss curves and prediction checks on sample images.</p>
+      <div class="gallery tall">
+        <figure><img src="img/fruit1.jpg" alt="Fruit classification demo predicting an apple" loading="lazy"></figure>
+        <figure><img src="img/fruit2.jpg" alt="Fruit classification demo predicting an orange" loading="lazy"></figure>
+        <figure><img src="img/fruit3.jpg" alt="Fruit classification demo predicting a cucumber" loading="lazy"></figure>
+      </div>
+      <h2>Key features</h2>
+      <ul>
+        <li>Transfer learning with VGG16</li>
+        <li>Fine-tuned on a custom fruit dataset</li>
+        <li>Prediction visualisation on test images</li>
+        <li>Efficient classification of several fruit categories</li>
+      </ul>
+      <h2>Workflow</h2>
+      <ul>
+        <li><strong>Dataset preparation:</strong> load, resize and normalise the images.</li>
+        <li><strong>Transfer learning setup:</strong> freeze the VGG16 base layers.</li>
+        <li><strong>Fine-tuning:</strong> train new fully connected layers for the fruit classes.</li>
+        <li><strong>Evaluation:</strong> compute accuracy and plot loss curves.</li>
+        <li><strong>Prediction visualisation:</strong> display predictions on test images.</li>
+      </ul>
+      <h2>Sample code</h2>
+<pre>from tensorflow.keras.applications import VGG16
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+
+base_model = VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
+base_model.trainable = False   # freeze convolutional layers
+
+model = Sequential([
+    base_model,
+    Flatten(),
+    Dense(256, activation='relu'),
+    Dense(5, activation='softmax')  # example: 5 fruit classes
+])
+
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])</pre>
+      <h2>Outcome</h2>
+      <p>The model generalised well across fruit categories from a small dataset, which suits it to teaching and lightweight real-world use.</p>
+      <ul class="tags"><li>Python</li><li>TensorFlow / Keras</li><li>VGG16</li><li>Transfer learning</li><li>Matplotlib</li></ul>
+      <div class="pager"><a href="index.html#research">Back to the home page</a><a href="index.html#publications">All publications</a></div>
+    </div>
+
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+  </main>
+</div>
+<script src="site.js" defer></script>
+</body>
+</html>

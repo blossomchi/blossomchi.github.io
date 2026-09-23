@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gesture-controlled assistive arm for speech-impaired cancer patients | Chinyere Blossom Oyem</title>
+<meta name="description" content="Vision-based gesture recognition and histopathology analysis in one adaptive network (CDAM-Net), driving an Arduino robotic arm. Accepted at ICARM 2026.">
+<link rel="canonical" href="https://blossomchi.github.io/project4.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gesture-controlled assistive arm for speech-impaired cancer patients | Chinyere Blossom Oyem">
+<meta property="og:description" content="Vision-based gesture recognition and histopathology analysis in one adaptive network (CDAM-Net), driving an Arduino robotic arm. Accepted at ICARM 2026.">
+<meta property="og:url" content="https://blossomchi.github.io/project4.html">
+<meta property="og:image" content="https://blossomchi.github.io/img/portrait.jpg">
+<meta name="theme-color" content="#0B1F3A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08111F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="blossom.ico">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="rail">
+    <a class="id" href="index.html">
+      <img src="img/portrait.jpg" alt="Portrait of Chinyere Blossom Oyem" width="108" height="108">
+      <strong>Chinyere Blossom Oyem</strong>
+      <span>Machine learning engineer and roboticist, Delta State, Nigeria</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="index.html#research">Research</a>
+      <a href="index.html#publications">Publications</a>
+      <a href="index.html#builds">Other builds</a>
+      <a href="index.html#teaching">Teaching</a>
+      <a href="index.html#background">Background</a>
+      <a href="index.html#credentials">Credentials</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <ul class="rail-links">
+      <li><a href="mailto:chiblossoyem@gmail.com">Email</a></li>
+      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV (PDF)</a></li>
+      <li><a href="https://github.com/blossomchi" rel="noopener">GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a></li>
+      <li><a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube: Blossom Coding World</a></li>
+    </ul>
+  </aside>
+  <main class="main" id="main">
+
+    <div class="wrap article">
+      <p class="crumb"><a href="index.html">Home</a> / <a href="index.html#research">Research</a></p>
+      <header class="pagehead">
+        <h1>Gesture-controlled assistive arm for <span class="nb">speech-impaired</span> cancer patients</h1>
+        <div class="status-row"><span class="status accepted">Accepted: ICARM 2026</span><span class="status accepted">Accepted: FNAS Journal of Computing and Applications, March 2026</span></div>
+        <p class="dek">A webcam reads hand gestures, an Arduino-controlled arm repositions a medical display, and one shared network also screens histopathology patches and alerts a clinician.</p>
+      </header>
+
+      <div class="note"><p><strong>Scope.</strong> Everything here was measured in a simulated laboratory with 10 healthy volunteers aged 22 to 35 (100 trials). No cancer patients, speech-impaired participants or clinicians took part. The results show technical feasibility, not clinical performance, and the system is meant for decision support only.</p></div>
+
+      <h2>The problem</h2>
+      <p>Patients with head-and-neck, oral or laryngeal cancer, or with voice loss after treatment, often cannot say what they need. Touch screens, eye trackers and text-to-speech are hard to use in sterile rooms, when a patient is tired, or where equipment is scarce. Gesture recognition and AI-assisted histopathology are usually built as separate systems, so nothing links what a patient signals to what a clinician sees.</p>
+
+      <h2>How the system works</h2>
+      <ol class="flow">
+        <li><strong>Capture</strong><span>A bedside webcam watches hand gestures. A microscope camera supplies histopathology patches. Both stream at 30 FPS.</span></li>
+        <li><strong>Share features</strong><span>Early ResNet50 layers (Conv1 to Block 2) learn edges and contours for both image types.</span></li>
+        <li><strong>Adapt</strong><span>Per-domain channel scaling and bias, plus channel attention, tune the shared features to each task.</span></li>
+        <li><strong>Predict</strong><span>A gesture head chooses zoom, pan or highlight. A cancer head returns benign or malignant.</span></li>
+        <li><strong>Act</strong><span>A 4-DOF arm tilts or pans the monitor, applies digital zoom or highlights a region.</span></li>
+        <li><strong>Notify</strong><span>A JSON message over WebSocket reaches a Flask dashboard used by the clinician.</span></li>
+      </ol>
+      <p style="margin-top:16px">A malignancy score above 90% also highlights the region and turns the monitor toward the clinician station.</p>
+
+      <h2>CDAM-Net, the shared network</h2>
+      <p>Hand gestures and tissue slides look nothing alike, so a naive shared backbone can let one task's gradients damage the other. The Cross-Domain Adaptive Multi-Task Network (CDAM-Net) keeps the sharing but adds three lightweight mechanisms.</p>
+      <ul>
+        <li><strong>Domain-adaptive feature modulation.</strong> Each task learns its own channel-wise scale and bias applied to the shared features.</li>
+        <li><strong>Attention-based gating.</strong> A small channel-attention block re-weights features toward what matters for the current task, such as hand boundaries or cell texture.</li>
+        <li><strong>Uncertainty-weighted loss.</strong> The two task losses are balanced by learned uncertainty terms rather than fixed weights, so neither task dominates training.</li>
+      </ul>
+      <p>The result is one backbone with two small heads instead of two full networks, which saves parameters and GPU memory on the GTX 1080 test hub.</p>
+
+      <h2>Results</h2>
+      <div class="tablewrap">
+        <table class="data">
+          <caption>Test-set and integration results from the laboratory evaluation.</caption>
+          <thead><tr><th>Measure</th><th class="num">Result</th><th>Context</th></tr></thead>
+          <tbody>
+            <tr><td>Gesture recognition, top-1 accuracy</td><td class="num">85.0%</td><td>Macro F1 0.83. Zoom is the most reliable class; pan and highlight are the most often confused.</td></tr>
+            <tr><td>Histopathology patch accuracy</td><td class="num">94.0%</td><td>Breast Histopathology Images dataset. Sensitivity 95.0%, specificity 93.0%, ROC-AUC 0.98.</td></tr>
+            <tr><td>Robot actuation success</td><td class="num">90.0%</td><td>The arm reached the correct pose. The 10% of failed trials were 8% gesture misclassifications and 2% servo timeouts.</td></tr>
+            <tr><td>Notification delivery</td><td class="num">95.0%</td><td>Delivered in under one second.</td></tr>
+            <tr><td>Mean end-to-end latency</td><td class="num">0.82 s</td><td>Standard deviation 0.20 s. Servo motion takes about 700 ms of it; network inference takes about 20 ms.</td></tr>
+            <tr><td>Low light and fast motion</td><td class="num">75%</td><td>Gesture accuracy at 50 lux with simulated motion blur. It falls off below about 100 lux.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The latency figure matters for what to improve next: the AI is not the bottleneck, the servos are. Faster servo hardware and predictive motion planning would help more than a faster network.</p>
+
+      <h2>Why breast histopathology, and a first look at head-and-neck</h2>
+      <p>The main cancer task uses the public Breast Histopathology Images dataset (277,524 patches) because it is large and well annotated, which lets the study test the architecture without data scarcity getting in the way. It is not a breast-cancer diagnostic tool. The publicly available head-and-neck set, TCGA-HNSC, is far smaller.</p>
+      <p>As a first check, the network pre-trained on breast patches was fine-tuned on 12,500 TCGA-HNSC patches with the backbone frozen, updating only the modulation layers and the cancer head. It reached 89.3% accuracy and ROC-AUC 0.94, against 72.1% accuracy for a randomly initialised ResNet50 trained directly on the same patches. This is a preliminary result on a small dataset.</p>
+
+      <h2>Limitations and next steps</h2>
+      <ul>
+        <li>Only healthy volunteers were tested, in a simulated setting with pre-loaded patches.</li>
+        <li>Accuracy drops in dim light, which real wards will have.</li>
+        <li>The main cancer result comes from a single public dataset.</li>
+        <li>Next: an IRB-approved study with patients and clinicians, a wider gesture vocabulary, gesture plus voice input, and larger head-and-neck datasets. Reinforcement learning for monitor positioning is planned.</li>
+      </ul>
+
+      <h2>Papers</h2>
+      <ul class="related">
+        <li>Oyem, C. B. <em>Vision-Based Assistive Robotic System with Real-Time Gesture Recognition and Cross-Domain Adaptive Learning for Communication Support in Speech-Impaired Cancer Patients.</em> 2026 International Conference on Advanced Robotics and Mechatronics (ICARM 2026), University of Évry Paris-Saclay, France, 21 to 23 July 2026. Accepted.</li>
+        <li>Okpako, A. E., Oyem, C. B., Ojie, D. V., Iyamah, B. E., &amp; Chiemeke, C. S. <em>A Vision-Based Assistive Robotic System with Real-Time Gesture Recognition for Communication Support in Speech-Impaired Cancer Patients: A Pilot Feasibility Study.</em> Faculty of Natural and Applied Sciences Journal of Computing and Applications, 3(1), March 2026. Accepted.</li>
+      </ul>
+      <ul class="tags"><li>PyTorch</li><li>ResNet50</li><li>Multi-task learning</li><li>Computer vision</li><li>Arduino</li><li>WebSocket</li><li>Flask</li></ul>
+      <div class="pager"><a href="index.html#research">Back to the home page</a><a href="index.html#publications">All publications</a></div>
+    </div>
+
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+  </main>
+</div>
+<script src="site.js" defer></script>
+</body>
+</html>

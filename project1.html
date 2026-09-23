@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI chatbot | Chinyere Blossom Oyem</title>
+<meta name="description" content="Rule-based and neural chatbot with a Streamlit interface, built as a teaching tool for teens.">
+<link rel="canonical" href="https://blossomchi.github.io/project1.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI chatbot | Chinyere Blossom Oyem">
+<meta property="og:description" content="Rule-based and neural chatbot with a Streamlit interface, built as a teaching tool for teens.">
+<meta property="og:url" content="https://blossomchi.github.io/project1.html">
+<meta property="og:image" content="https://blossomchi.github.io/img/portrait.jpg">
+<meta name="theme-color" content="#0B1F3A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08111F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="blossom.ico">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="rail">
+    <a class="id" href="index.html">
+      <img src="img/portrait.jpg" alt="Portrait of Chinyere Blossom Oyem" width="108" height="108">
+      <strong>Chinyere Blossom Oyem</strong>
+      <span>Machine learning engineer and roboticist, Delta State, Nigeria</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="index.html#research">Research</a>
+      <a href="index.html#publications">Publications</a>
+      <a href="index.html#builds">Other builds</a>
+      <a href="index.html#teaching">Teaching</a>
+      <a href="index.html#background">Background</a>
+      <a href="index.html#credentials">Credentials</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <ul class="rail-links">
+      <li><a href="mailto:chiblossoyem@gmail.com">Email</a></li>
+      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV (PDF)</a></li>
+      <li><a href="https://github.com/blossomchi" rel="noopener">GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a></li>
+      <li><a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube: Blossom Coding World</a></li>
+    </ul>
+  </aside>
+  <main class="main" id="main">
+
+    <div class="wrap article">
+      <p class="crumb"><a href="index.html">Home</a> / <a href="index.html#builds">Other builds</a></p>
+      <header class="pagehead">
+        <h1>AI chatbot</h1>
+        
+        <p class="dek">A rule-based and neural chatbot with a Streamlit interface, built as a practical teaching tool for teens aged 12 to 18.</p>
+      </header>
+
+      <h2>Overview</h2>
+      <p>This project combines a simple rule-based chatbot with an optional neural intent classifier. It was deployed with Streamlit so students could test it in a friendly web interface and then extend it themselves.</p>
+      <div class="gallery">
+        <figure><img src="img/chatbot1.jpg" alt="Chatbot demo interface with a message box" loading="lazy"></figure>
+        <figure><img src="img/chatbot2.jpg" alt="Chatbot answering a question about Nigeria with a list of facts" loading="lazy"></figure>
+        <figure><img src="img/chatbot3.jpg" alt="Chatbot naming Abuja as the capital of Nigeria" loading="lazy"></figure>
+      </div>
+      <h2>Key features</h2>
+      <ul>
+        <li>Rule-based chatbot with pattern matching</li>
+        <li>Neural intent classifier using bag-of-words or embeddings</li>
+        <li>Streamlit interface for easy testing</li>
+        <li>Simplified logic that teens can read and change</li>
+        <li>Intents and responses that are easy to expand</li>
+      </ul>
+      <h2>Development workflow</h2>
+      <ul>
+        <li><strong>Intent design:</strong> define intents, patterns and responses.</li>
+        <li><strong>Rule-based matching:</strong> extract keywords and map them to predefined responses.</li>
+        <li><strong>Neural model (optional):</strong> train a simple classifier to detect intents.</li>
+        <li><strong>Streamlit deployment:</strong> build a text-box interface for interactive chats.</li>
+        <li><strong>Testing and refinement:</strong> improve responses using student feedback.</li>
+      </ul>
+      <h2>Sample code</h2>
+<pre>import random
+
+responses = {
+    "greeting": ["Hello!", "Hi there!", "Nice to meet you!"],
+    "bye": ["Goodbye!", "See you later!", "Bye for now!"]
+}
+
+def get_intent(message):
+    message = message.lower()
+    if "hi" in message or "hello" in message:
+        return "greeting"
+    elif "bye" in message:
+        return "bye"
+    return "unknown"
+
+def chatbot_reply(message):
+    intent = get_intent(message)
+    if intent in responses:
+        return random.choice(responses[intent])
+    return "I'm not sure I understand. Can you rephrase?"</pre>
+      <h2>Outcome</h2>
+      <p>Students learned the basics of chatbots, natural language processing and intent classification, and were able to extend the bot on their own.</p>
+      <ul class="tags"><li>Python</li><li>NLTK</li><li>TensorFlow / PyTorch</li><li>Streamlit</li><li>Rule-based NLP</li></ul>
+      <div class="pager"><a href="index.html#research">Back to the home page</a><a href="index.html#publications">All publications</a></div>
+    </div>
+
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+  </main>
+</div>
+<script src="site.js" defer></script>
+</body>
+</html>

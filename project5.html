@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Firefighter humanoid robot with suppression-outcome feedback | Chinyere Blossom Oyem</title>
+<meta name="description" content="A low-cost firefighting robot that checks whether its own spray worked and re-aims if not. Under review.">
+<link rel="canonical" href="https://blossomchi.github.io/project5.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Firefighter humanoid robot with suppression-outcome feedback | Chinyere Blossom Oyem">
+<meta property="og:description" content="A low-cost firefighting robot that checks whether its own spray worked and re-aims if not. Under review.">
+<meta property="og:url" content="https://blossomchi.github.io/project5.html">
+<meta property="og:image" content="https://blossomchi.github.io/img/portrait.jpg">
+<meta name="theme-color" content="#0B1F3A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08111F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="blossom.ico">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="rail">
+    <a class="id" href="index.html">
+      <img src="img/portrait.jpg" alt="Portrait of Chinyere Blossom Oyem" width="108" height="108">
+      <strong>Chinyere Blossom Oyem</strong>
+      <span>Machine learning engineer and roboticist, Delta State, Nigeria</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="index.html#research">Research</a>
+      <a href="index.html#publications">Publications</a>
+      <a href="index.html#builds">Other builds</a>
+      <a href="index.html#teaching">Teaching</a>
+      <a href="index.html#background">Background</a>
+      <a href="index.html#credentials">Credentials</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <ul class="rail-links">
+      <li><a href="mailto:chiblossoyem@gmail.com">Email</a></li>
+      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV (PDF)</a></li>
+      <li><a href="https://github.com/blossomchi" rel="noopener">GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a></li>
+      <li><a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube: Blossom Coding World</a></li>
+    </ul>
+  </aside>
+  <main class="main" id="main">
+
+    <div class="wrap article">
+      <p class="crumb"><a href="index.html">Home</a> / <a href="index.html#research">Research</a></p>
+      <header class="pagehead">
+        <h1>Firefighter humanoid robot that checks whether its spray worked</h1>
+        <div class="status-row"><span class="status review">Under review at four conferences</span></div>
+        <p class="dek">A wheeled robot with a humanoid-inspired pan/tilt upper body aims a hose, then measures whether the fire is actually responding and re-aims if it is not.</p>
+      </header>
+
+      <div class="note"><p><strong>Build status.</strong> The paper reports the design and an evaluation protocol. The camera and AI computer, the sensors, the pan/tilt arm and the pump relay have each been assembled and are being integrated onto the mobile base. Full closed-loop operation and field trials are not finished, so no trial results are claimed on this page.</p></div>
+
+      <h2>The problem</h2>
+      <p>Firefighting robots usually separate seeing from spraying, aim along a single axis, or assume that switching the pump on means the fire is being put out. Systems that do close the loop tend to depend on thermal cameras, LiDAR and industrial water cannons, which puts them out of reach for many hospitals, factories and homes. This project asks how much of that loop can be kept on low-cost hardware.</p>
+
+      <h2>The RAPS-SOF control loop</h2>
+      <p>RAPS-SOF stands for Risk-Adaptive Perception-to-Suppression with Suppression-Outcome Feedback. It treats suppression as a cycle of perceiving, acting and evaluating, not a single aim-and-spray step.</p>
+      <ol class="flow">
+        <li><strong>Detect</strong><span>A YOLOv8 detector on a Raspberry Pi 5 finds fire regions and gives a confidence score.</span></li>
+        <li><strong>Fuse</strong><span>Vision is combined with flame, infrared temperature, gas, distance and tilt readings, each weighted by how reliable it currently is.</span></li>
+        <li><strong>Choose a target</strong><span>Candidate fires are scored on confidence, size, heat, distance and platform stability, not just box size.</span></li>
+        <li><strong>Aim</strong><span>Two servos, pan and tilt, point the hose at the chosen fire.</span></li>
+        <li><strong>Spray and confirm</strong><span>A flow sensor confirms that water is really leaving the nozzle.</span></li>
+        <li><strong>Check the effect</strong><span>Flame, heat and gas readings before and after are combined into an effectiveness score.</span></li>
+      </ol>
+      <p class="flow-return">If flow is confirmed but the fire is not responding, the robot goes back to step 3, re-selects the target and re-aims before spraying again. If flow is not confirmed, that is treated as a hardware fault such as a blocked nozzle or an empty tank, not as a failed suppression.</p>
+
+      <h2>What is and is not new</h2>
+      <p>Multi-sensor fusion and feedback-controlled suppression both have precedent, and the paper says so. The contribution is putting a reliability-weighted low-cost fusion, an explicit check of the suppression outcome and a re-aiming humanoid mechanism into one loop that runs on inexpensive embedded hardware.</p>
+
+      <h2>Sensor fusion</h2>
+      <p>Each sensor contributes a confidence, and the weights are those confidences normalised. If smoke degrades the camera view, its weight drops. If the flame sensor sees nothing, its confidence falls toward zero. A low infrared temperature discounts a flame-sensor trigger as a likely false positive, and when two high-confidence sensors strongly disagree the robot recalibrates instead of committing to a guess.</p>
+
+      <h2>Hardware</h2>
+      <div class="tablewrap">
+        <table class="data">
+          <thead><tr><th>Component</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td>Raspberry Pi 5</td><td>Vision, sensor fusion and decision logic</td></tr>
+            <tr><td>Arduino Uno R3</td><td>Real-time sensor reading and actuator control over a serial link</td></tr>
+            <tr><td>USB camera</td><td>Fire detection with YOLOv8</td></tr>
+            <tr><td>Flame sensor, MLX90614 infrared thermometer, MQ-2 gas sensor</td><td>Confirm fire and estimate heat and gas</td></tr>
+            <tr><td>HC-SR04 ultrasonic sensor, MPU-6050 IMU</td><td>Distance to target and platform tilt</td></tr>
+            <tr><td>MG996R servos (pan and tilt)</td><td>Humanoid-inspired hose aiming</td></tr>
+            <tr><td>12 V pump, relay and YF-S201 flow sensor</td><td>Water discharge and flow confirmation</td></tr>
+            <tr><td>L298N driver, four-wheel base</td><td>Locomotion</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Safety by design</h2>
+      <ul>
+        <li>A watchdog halts the robot if the Pi and Arduino stop talking for 500 ms.</li>
+        <li>If vision is lost, the robot falls back to flame, gas and infrared cues; if another sensor is blocked, it falls back to vision plus the rest.</li>
+        <li>A physical kill switch and pump temperature monitoring are included.</li>
+      </ul>
+      <p>These are designed safeguards. The paper plans to test them with fault injection.</p>
+
+      <h2>Planned evaluation</h2>
+      <p>A 4 m by 4 m indoor testbed with smoke, obstacles and airflow, using safe combustion sources such as ethanol burners and candle flames. Five scenarios (clear view, partial occlusion, smoke, multiple fires, moving obstacles) will be run on four configurations: open loop, adaptive without feedback, sensor-only and vision-only baselines, and full RAPS-SOF. Each combination will be repeated at least 10 times and every result reported with its standard deviation and 95% confidence interval. A dedicated test will deliberately offset the first aim to check that only the full system notices and corrects it.</p>
+
+      <h2>Prototype builds</h2>
+      <div class="gallery">
+        <figure><img src="img/firebot1.jpg" alt="Early cardboard-bodied firefighting robot prototype on four wheels" loading="lazy"><figcaption>Early humanoid-bodied prototype on a four-wheel base.</figcaption></figure>
+        <figure><img src="img/firebot2.jpg" alt="Robot chassis with Arduino, wiring, water container and a hose" loading="lazy"><figcaption>Chassis with Arduino, wiring, water container and hose.</figcaption></figure>
+        <figure><img src="img/firebot3.jpg" alt="Side view of the firefighting robot prototype" loading="lazy"><figcaption>Side view of the prototype.</figcaption></figure>
+      </div>
+
+      <h2>Why I built it</h2>
+      <p>The idea began with the 2025 Canadian wildfires, when smoke reached Chicago and triggered air-quality alerts across North America. It made a simple case for robots that can enter smoke-filled rooms so that people do not have to.</p>
+
+      <h2>Next steps</h2>
+      <p>Finish integration and run the full evaluation, then add SLAM-based mapping for multi-room use. Longer term: learning the effectiveness-score weights with reinforcement learning, multi-robot coordination, and thermal or depth sensing for dense smoke.</p>
+
+      <h2>Paper</h2>
+      <ul class="related">
+        <li>Okpako, A. E., Oyem, C. B., &amp; Chiemeke, C. S. <em>An Edge-AI Humanoid Firefighting Robot with Risk-Adaptive Multisensor Perception and Suppression-Outcome Feedback for Smart-Building Disaster Response.</em> Submitted to four conferences: SCA 2026 (11th International Conference on Smart Cities &amp; Applications), ICRA 2027 (2027 IEEE International Conference on Robotics and Automation), ACDSA 2027 (International Conference on Artificial Intelligence, Computer, Data Sciences, and Applications) and CSAI Days 2026 (International Conference on Cybersecurity &amp; Artificial Intelligence). Under review.</li>
+      </ul>
+      <ul class="tags"><li>Raspberry Pi 5</li><li>Arduino</li><li>YOLOv8</li><li>Sensor fusion</li><li>Closed-loop control</li><li>Embedded systems</li></ul>
+      <div class="pager"><a href="index.html#research">Back to the home page</a><a href="index.html#publications">All publications</a></div>
+    </div>
+
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+  </main>
+</div>
+<script src="site.js" defer></script>
+</body>
+</html>
