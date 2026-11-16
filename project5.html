@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Firefighter humanoid robot with suppression-outcome feedback | Chinyere Blossom Oyem</title>
-<meta name="description" content="A low-cost firefighting robot that checks whether its own spray worked and re-aims if not. Under review.">
+<title>Pan-and-tilt firefighting robot with suppression-outcome feedback | Chinyere Blossom Oyem</title>
+<meta name="description" content="A low-cost firefighting robot that checks whether its own spray worked and re-aims if not. Accepted at SCA 2026.">
 <link rel="canonical" href="https://blossomchi.github.io/project5.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Firefighter humanoid robot with suppression-outcome feedback | Chinyere Blossom Oyem">
-<meta property="og:description" content="A low-cost firefighting robot that checks whether its own spray worked and re-aims if not. Under review.">
+<meta property="og:title" content="Pan-and-tilt firefighting robot with suppression-outcome feedback | Chinyere Blossom Oyem">
+<meta property="og:description" content="A low-cost firefighting robot that checks whether its own spray worked and re-aims if not. Accepted at SCA 2026.">
 <meta property="og:url" content="https://blossomchi.github.io/project5.html">
 <meta property="og:image" content="https://blossomchi.github.io/img/portrait.jpg">
 <meta name="theme-color" content="#0B1F3A" media="(prefers-color-scheme: light)">
@@ -51,33 +51,33 @@
     <div class="wrap article">
       <p class="crumb"><a href="index.html">Home</a> / <a href="index.html#research">Research</a></p>
       <header class="pagehead">
-        <h1>Firefighter humanoid robot that checks whether its spray worked</h1>
-        <div class="status-row"><span class="status review">Under review at four conferences</span></div>
-        <p class="dek">A wheeled robot with a humanoid-inspired pan/tilt upper body aims a hose, then measures whether the fire is actually responding and re-aims if it is not.</p>
+        <h1>Pan-and-tilt firefighting robot that checks whether its spray worked</h1>
+        <div class="status-row"><span class="status accepted">Accepted: SCA 2026, Karabük, Türkiye, 10 to 12 November 2026</span></div>
+        <p class="dek">A low-cost wheeled robot aims a two-axis nozzle arm, then measures whether the fire is actually responding and re-targets if it is not.</p>
       </header>
 
-      <div class="note"><p><strong>Build status.</strong> The paper reports the design and an evaluation protocol. The camera and AI computer, the sensors, the pan/tilt arm and the pump relay have each been assembled and are being integrated onto the mobile base. Full closed-loop operation and field trials are not finished, so no trial results are claimed on this page.</p></div>
+      <div class="note"><p><strong>Scope.</strong> The results below come from a Python simulation with assumed sensor models and a fixed random seed (376); the code is released. The camera and AI computer, the sensors, the pan/tilt arm and the pump relay have each been assembled and are being integrated onto the mobile base, but closed-loop hardware trials are not complete. No hardware performance is claimed on this page or in the paper.</p></div>
 
       <h2>The problem</h2>
-      <p>Firefighting robots usually separate seeing from spraying, aim along a single axis, or assume that switching the pump on means the fire is being put out. Systems that do close the loop tend to depend on thermal cameras, LiDAR and industrial water cannons, which puts them out of reach for many hospitals, factories and homes. This project asks how much of that loop can be kept on low-cost hardware.</p>
+      <p>Firefighting robots usually separate seeing from spraying, aim a nozzle that cannot move, or assume that switching the pump on means the fire is being put out. Systems that do close the loop tend to rely on thermal cameras, LiDAR and industrial water cannons, which puts them out of reach for many hospitals, factories and homes. This project asks how much of that loop can be kept on inexpensive hardware.</p>
 
       <h2>The RAPS-SOF control loop</h2>
       <p>RAPS-SOF stands for Risk-Adaptive Perception-to-Suppression with Suppression-Outcome Feedback. It treats suppression as a cycle of perceiving, acting and evaluating, not a single aim-and-spray step.</p>
       <ol class="flow">
         <li><strong>Detect</strong><span>A YOLOv8 detector on a Raspberry Pi 5 finds fire regions and gives a confidence score.</span></li>
-        <li><strong>Fuse</strong><span>Vision is combined with flame, infrared temperature, gas, distance and tilt readings, each weighted by how reliable it currently is.</span></li>
-        <li><strong>Choose a target</strong><span>Candidate fires are scored on confidence, size, heat, distance and platform stability, not just box size.</span></li>
-        <li><strong>Aim</strong><span>Two servos, pan and tilt, point the hose at the chosen fire.</span></li>
-        <li><strong>Spray and confirm</strong><span>A flow sensor confirms that water is really leaving the nozzle.</span></li>
-        <li><strong>Check the effect</strong><span>Flame, heat and gas readings before and after are combined into an effectiveness score.</span></li>
+        <li><strong>Fuse</strong><span>Vision, flame, infrared temperature and gas readings are combined, each weighted by how reliable it currently is. Only the camera gives a bearing, so bearings are never averaged across sensors.</span></li>
+        <li><strong>Choose a target</strong><span>Candidate fires are scored on fused confidence, size, heat, distance and platform stability, minus a penalty for any region where an earlier aim failed.</span></li>
+        <li><strong>Aim</strong><span>Two servos, pan and tilt, point the nozzle. If vision is unreliable, the arm sweeps and the flame sensor and thermometer on the nozzle find the response peak.</span></li>
+        <li><strong>Spray and confirm</strong><span>The pump runs in short pulses, and a flow sensor confirms that water is really leaving the nozzle.</span></li>
+        <li><strong>Check the effect</strong><span>Temperature and flame readings are averaged before the pulse and again after a short pause, and the change becomes an effectiveness score.</span></li>
       </ol>
-      <p class="flow-return">If flow is confirmed but the fire is not responding, the robot goes back to step 3, re-selects the target and re-aims before spraying again. If flow is not confirmed, that is treated as a hardware fault such as a blocked nozzle or an empty tank, not as a failed suppression.</p>
+      <p class="flow-return">The effectiveness score uses two thresholds. A high score means the pulse worked. A low score means it did not, and the robot stores the failed aim, penalises that direction, re-estimates the fire from a fresh frame, searches a few degrees either side if needed, and tries again. A score in between is undecided and triggers one more pulse. After three ineffective pulses in a row the robot stops spraying, raises an alert and retreats where possible, since the cause may not be aim at all. If flow is not confirmed, that is treated as a hardware fault such as a blocked nozzle or an empty tank, not as a failed suppression.</p>
 
       <h2>What is and is not new</h2>
-      <p>Multi-sensor fusion and feedback-controlled suppression both have precedent, and the paper says so. The contribution is putting a reliability-weighted low-cost fusion, an explicit check of the suppression outcome and a re-aiming humanoid mechanism into one loop that runs on inexpensive embedded hardware.</p>
+      <p>Multi-sensor fusion and feedback-controlled suppression both have precedent, and the paper says so. McNeil and Lattimer showed autonomous feedback control of aim, and Ren and colleagues reached sub-second extinguishment at up to 13.5 m with depth and LiDAR sensing on a Jetson-class computer. The contribution here is integrating these ideas on inexpensive hardware, with a per-pulse check of the suppression outcome that triggers a defined re-targeting rule for an articulated nozzle. The paper makes no claim of matching the range or speed of those systems.</p>
 
       <h2>Sensor fusion</h2>
-      <p>Each sensor contributes a confidence, and the weights are those confidences normalised. If smoke degrades the camera view, its weight drops. If the flame sensor sees nothing, its confidence falls toward zero. A low infrared temperature discounts a flame-sensor trigger as a likely false positive, and when two high-confidence sensors strongly disagree the robot recalibrates instead of committing to a guess.</p>
+      <p>Each sensor gives a presence score between 0 and 1, and its reliability is the product of three things: a health gate, a noise term and an agreement term. Noisier sensors are down-weighted. A sensor that often disagrees with the majority is down-weighted. The gate switches a sensor off entirely while it cannot be trusted: during gas-sensor warm-up, for a few seconds after each pump pulse, while spray is in the thermometer's view, and when the image shows smoke or low light. If two reliable sensors disagree, the pump stays off while the robot re-samples, and a fault is raised if the disagreement persists.</p>
 
       <h2>Hardware</h2>
       <div class="tablewrap">
@@ -85,31 +85,80 @@
           <thead><tr><th>Component</th><th>Role</th></tr></thead>
           <tbody>
             <tr><td>Raspberry Pi 5</td><td>Vision, sensor fusion and decision logic</td></tr>
-            <tr><td>Arduino Uno R3</td><td>Real-time sensor reading and actuator control over a serial link</td></tr>
+            <tr><td>Arduino Uno R3</td><td>Sensor reading, actuator control and fail-safes over a serial link</td></tr>
             <tr><td>USB camera</td><td>Fire detection with YOLOv8</td></tr>
             <tr><td>Flame sensor, MLX90614 infrared thermometer, MQ-2 gas sensor</td><td>Confirm fire and estimate heat and gas</td></tr>
             <tr><td>HC-SR04 ultrasonic sensor, MPU-6050 IMU</td><td>Distance to target and platform tilt</td></tr>
-            <tr><td>MG996R servos (pan and tilt)</td><td>Humanoid-inspired hose aiming</td></tr>
+            <tr><td>MG996R servos (pan and tilt)</td><td>Nozzle aiming</td></tr>
             <tr><td>12 V pump, relay and YF-S201 flow sensor</td><td>Water discharge and flow confirmation</td></tr>
             <tr><td>L298N driver, four-wheel base</td><td>Locomotion</td></tr>
           </tbody>
         </table>
       </div>
+      <p>The servos run from a separate regulated 6 V rail, the Pi from its own 5 V converter, and the pump and drive motors from the 12 V battery, with a common ground. Battery runtime, memory use, loop timing and a priced bill of materials will be reported after integration.</p>
+
+      <h2>Simulation results</h2>
+      <p>Three simulation studies tested whether the algorithms behave as designed under assumed noise: sensor fusion with injected faults, the outcome score on 3,000 held-out pulses, and the closed loop with 100 trials per setting.</p>
+      <div class="tablewrap">
+        <table class="data">
+          <caption>Fire detection at a common threshold of 0.5, with 30% of runs having a random sensor stuck high or low (200 runs per condition).</caption>
+          <thead><tr><th>Method</th><th class="num">Detected on fire runs</th><th class="num">False alarms on no-fire runs</th></tr></thead>
+          <tbody>
+            <tr><td>Vision only</td><td class="num">50%</td><td class="num">51%</td></tr>
+            <tr><td>Sensors only</td><td class="num">76%</td><td class="num">10%</td></tr>
+            <tr><td>Static fusion</td><td class="num">100%</td><td class="num">99%</td></tr>
+            <tr class="hl"><td>Reliability-weighted fusion</td><td class="num">94%</td><td class="num">5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table class="data">
+          <caption>Closed-loop suppression, 100 trials per row. Success is shown with its 95% confidence interval.</caption>
+          <thead><tr><th>Setting</th><th>Configuration</th><th class="num">Success</th><th class="num">Median pulses</th></tr></thead>
+          <tbody>
+            <tr><td>Offset first aim</td><td>Open loop</td><td class="num">0% [0, 0]</td><td class="num">4</td></tr>
+            <tr><td>Offset first aim</td><td>Adaptive flow, no feedback</td><td class="num">0% [0, 0]</td><td class="num">4</td></tr>
+            <tr class="hl"><td>Offset first aim</td><td>Full RAPS-SOF</td><td class="num">86% [79, 92]</td><td class="num">4</td></tr>
+            <tr><td>Small natural aim error</td><td>Open loop</td><td class="num">90% [84, 95]</td><td class="num">3</td></tr>
+            <tr><td>Small natural aim error</td><td>Adaptive flow, no feedback</td><td class="num">83% [75, 90]</td><td class="num">3</td></tr>
+            <tr class="hl"><td>Small natural aim error</td><td>Full RAPS-SOF</td><td class="num">93% [87, 97]</td><td class="num">3</td></tr>
+            <tr><td>Smoke, large aim error</td><td>Open loop</td><td class="num">19% [12, 27]</td><td class="num">4</td></tr>
+            <tr><td>Smoke, large aim error</td><td>Adaptive flow, no feedback</td><td class="num">27% [18, 36]</td><td class="num">4</td></tr>
+            <tr class="hl"><td>Smoke, large aim error</td><td>Full RAPS-SOF</td><td class="num">45% [36, 55]</td><td class="num">4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What worked</h3>
+      <ul>
+        <li>Reliability weighting moved as designed: the camera's weight fell to about zero when it was covered and to 0.01 in smoke, and the flame sensor's fell to 0.05 when it was blocked.</li>
+        <li>The outcome score separated effective from ineffective pulses with an AUC of 0.999 on held-out pulses, and changing its weights and thresholds by 20% moved accuracy by at most 0.1 points.</li>
+        <li>With a deliberately offset first aim, the full loop recovered in 86% of trials and flagged the ineffective first pulse within two pulses every time. The two baselines could not recover by design.</li>
+      </ul>
+      <h3>What did not</h3>
+      <ul>
+        <li>When the first aim was already roughly right, feedback added little: 93% success against 90% and 83%, with overlapping intervals and no time advantage.</li>
+        <li>In smoke, feedback helped (45% against 19% and 27%) but success stayed low, because each re-aim from a noisy vision estimate rarely landed inside the 3 degree stream footprint. Smoke also pushed 14% of pulses into the undecided band, so more pulses were repeated.</li>
+        <li>Reliability weighting failed when two sensors agreed on a false signal: a sunlit lamp produced 11% false alarms.</li>
+        <li>The high outcome-score accuracy partly reflects assumed noise and labels drawn from the same model. Steam and gas-sensor humidity effects are barely modelled, and only one fire and one nozzle were simulated, so risk-adaptive target selection and multi-fire scenes were not tested.</li>
+      </ul>
+      <p>Simulation code and results: <a href="https://github.com/blossomchi/Raps-Sof-Simulation" rel="noopener">github.com/blossomchi/Raps-Sof-Simulation</a> (MIT licence). The repository also holds an early reactive Arduino prototype for hardware bring-up; it does not yet implement the RAPS-SOF protocol, dual pan and tilt control or per-pulse outcome feedback.</p>
 
       <h2>Safety by design</h2>
       <ul>
         <li>A watchdog halts the robot if the Pi and Arduino stop talking for 500 ms.</li>
-        <li>If vision is lost, the robot falls back to flame, gas and infrared cues; if another sensor is blocked, it falls back to vision plus the rest.</li>
-        <li>A physical kill switch and pump temperature monitoring are included.</li>
+        <li>If a sensor is lost, the robot degrades gracefully to the remaining ones, and a physical kill switch is included.</li>
+        <li>Water conducts electricity, so autonomous discharge is conditional: it is enabled only when a supervisor confirms the zone is de-energised, a minimum stand-off distance is enforced, and tests use rooms without live equipment. Otherwise the robot only monitors and alerts.</li>
+        <li>The electronics need a spray-protected enclosure, and non-conductive agents such as CO&#8322; or dry powder are future work.</li>
       </ul>
-      <p>These are designed safeguards. The paper plans to test them with fault injection.</p>
+      <p>These are designed safeguards and have not been tested. The paper plans to validate them by fault injection.</p>
 
-      <h2>Planned evaluation</h2>
-      <p>A 4 m by 4 m indoor testbed with smoke, obstacles and airflow, using safe combustion sources such as ethanol burners and candle flames. Five scenarios (clear view, partial occlusion, smoke, multiple fires, moving obstacles) will be run on four configurations: open loop, adaptive without feedback, sensor-only and vision-only baselines, and full RAPS-SOF. Each combination will be repeated at least 10 times and every result reported with its standard deviation and 95% confidence interval. A dedicated test will deliberately offset the first aim to check that only the full system notices and corrects it.</p>
+      <h2>Planned hardware evaluation</h2>
+      <p>A 4 m by 4 m enclosed testbed with smoke and airflow. Five scenarios (direct view, occlusion, smoke, multiple fires, dynamic obstacles) will be run on six configurations: open loop, adaptive flow without feedback, vision only, sensors only, feedback without risk-adaptive targeting, and full RAPS-SOF. Each combination will be repeated at least 10 times and reported as medians with 95% bootstrap intervals, using Mann&ndash;Whitney U tests, Holm correction and Cliff's delta. A fire counts as extinguished when the infrared temperature at the fire is near ambient and no flame is visible for a stated time, annotated from video by two people. Detector accuracy, latency, memory use and runtime will be measured at this stage.</p>
 
       <h2>Prototype builds</h2>
       <div class="gallery">
-        <figure><img src="img/firebot1.jpg" alt="Early cardboard-bodied firefighting robot prototype on four wheels" loading="lazy"><figcaption>Early humanoid-bodied prototype on a four-wheel base.</figcaption></figure>
+        <figure><img src="img/firebot1.jpg" alt="Early cardboard-bodied firefighting robot prototype on four wheels" loading="lazy"><figcaption>Early humanoid-styled prototype on a four-wheel base.</figcaption></figure>
         <figure><img src="img/firebot2.jpg" alt="Robot chassis with Arduino, wiring, water container and a hose" loading="lazy"><figcaption>Chassis with Arduino, wiring, water container and hose.</figcaption></figure>
         <figure><img src="img/firebot3.jpg" alt="Side view of the firefighting robot prototype" loading="lazy"><figcaption>Side view of the prototype.</figcaption></figure>
       </div>
@@ -118,17 +167,17 @@
       <p>The idea began with the 2025 Canadian wildfires, when smoke reached Chicago and triggered air-quality alerts across North America. It made a simple case for robots that can enter smoke-filled rooms so that people do not have to.</p>
 
       <h2>Next steps</h2>
-      <p>Finish integration and run the full evaluation, then add SLAM-based mapping for multi-room use. Longer term: learning the effectiveness-score weights with reinforcement learning, multi-robot coordination, and thermal or depth sensing for dense smoke.</p>
+      <p>Finish integration and run the full hardware protocol. After that: SLAM-based navigation for multi-room use, learned weights for the effectiveness score, thermal and depth sensing for dense smoke, a building-system interface that signals when a zone is de-energised, and non-conductive extinguishing agents.</p>
 
       <h2>Paper</h2>
       <ul class="related">
-        <li>Okpako, A. E., Oyem, C. B., &amp; Chiemeke, C. S. <em>An Edge-AI Humanoid Firefighting Robot with Risk-Adaptive Multisensor Perception and Suppression-Outcome Feedback for Smart-Building Disaster Response.</em> Submitted to four conferences: SCA 2026 (11th International Conference on Smart Cities &amp; Applications), ICRA 2027 (2027 IEEE International Conference on Robotics and Automation), ACDSA 2027 (International Conference on Artificial Intelligence, Computer, Data Sciences, and Applications) and CSAI Days 2026 (International Conference on Cybersecurity &amp; Artificial Intelligence). Under review.</li>
+        <li>Okpako, A. E., Oyem, C. B., Chiemeke, C. S., Ojie, D. V., &amp; Chete, F. <em>An Edge-AI Articulated Pan-and-Tilt Firefighting Robot with Risk-Adaptive Multi-sensor Perception and Suppression-Outcome Feedback for Indoor Smart Building Fire Response.</em> 11th International Conference on Smart Cities &amp; Applications (SCA 2026), Karabük University, Türkiye, 10 to 12 November 2026. Accepted. Publication is planned in Springer's Lecture Notes in Networks and Systems; the paper will be submitted for Scopus indexing but is not yet Scopus-indexed.</li>
       </ul>
       <ul class="tags"><li>Raspberry Pi 5</li><li>Arduino</li><li>YOLOv8</li><li>Sensor fusion</li><li>Closed-loop control</li><li>Embedded systems</li></ul>
       <div class="pager"><a href="index.html#research">Back to the home page</a><a href="index.html#publications">All publications</a></div>
     </div>
 
-    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of November 2026.</footer>
   </main>
 </div>
 <script src="site.js" defer></script>

@@ -49,7 +49,7 @@
     </nav>
     <ul class="rail-links">
       <li><a href="mailto:chiblossoyem@gmail.com">Email</a></li>
-      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV</a></li>
+      <li><a href="Chinyere_Blossom_Oyem_CV.pdf">Download CV (PDF)</a></li>
       <li><a href="https://github.com/blossomchi" rel="noopener">GitHub</a></li>
       <li><a href="https://scholar.google.com/citations?user=uftesUcAAAAJ&hl=en" rel="noopener">Google Scholar</a></li>
       <li><a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">YouTube: Blossom Coding World</a></li>
@@ -60,8 +60,8 @@
     <div class="wrap">
     <section class="hero" id="top">
       <h1>Building <span class="hl nb">assistive &amp; autonomous</span> robotic systems for real-world impact</h1>
-      <p class="lede">I'm Chinyere Blossom Oyem, a machine learning engineer and roboticist in Delta State, Nigeria, and Head of ICT at Rolof Institute of Management and Technology. My current research covers an assistive arm for speech-impaired cancer patients, a firefighting robot designed to re-aim when its first spray does not work, and a search-and-rescue planner for microcontroller-class robots.</p>
-      <p class="hero-status">Two papers accepted, two under review, one in preparation. <a href="#publications">See the publications</a>.</p>
+      <p class="lede">I'm Chinyere Blossom Oyem, a machine learning engineer and roboticist in Delta State, Nigeria, and Head of ICT at Rolof Institute of Management and Technology. My current research covers an assistive arm for speech-impaired cancer patients, a firefighting robot that re-aims when its first spray does not work, and a search-and-rescue planner for microcontroller-class robots.</p>
+      <p class="hero-status">Four papers accepted, one in preparation. <a href="#publications">See the publications</a>.</p>
 
       <figure class="loop">
         <div class="loop-return" aria-hidden="true"><span>each result feeds the next reading</span></div>
@@ -93,25 +93,25 @@
       </article>
 
       <article class="study">
-        <span class="status review">Under review</span>
+        <span class="status accepted">Accepted</span>
         <h3><a href="project5.html">Firefighting robot that checks whether its own spray worked</a></h3>
-        <p>A wheeled base carries a humanoid-inspired pan/tilt upper body that aims the hose. Camera, flame, heat, gas, distance, motion and water-flow readings are fused with reliability weights. After each spray the robot compares flame, heat and gas readings, and if the fire is not responding it re-selects the target and re-aims instead of spraying blindly.</p>
+        <p>A wheeled base carries a two-axis pan/tilt nozzle arm. Camera, flame, heat, gas, distance, inertial and water-flow readings are fused with reliability weights. After each spray pulse the robot compares flame and heat readings before and after, and if the fire is not responding it re-selects the target and re-aims instead of spraying blindly.</p>
         <dl class="facts">
-          <dt>Papers</dt><dd>Submitted to four conferences: SCA 2026, ICRA 2027, ACDSA 2027 and CSAI Days 2026.</dd>
-          <dt>Evidence</dt><dd>A design and an evaluation protocol. The subsystems are built and being integrated; field-trial results are not reported yet.</dd>
-          <dt>Hardware</dt><dd>Raspberry Pi 5, Arduino Uno and off-the-shelf sensors.</dd>
+          <dt>Paper</dt><dd>Accepted at SCA 2026, the 11th International Conference on Smart Cities &amp; Applications, Karabük University, Türkiye, 10 to 12 November 2026. Publication is planned in Springer's Lecture Notes in Networks and Systems.</dd>
+          <dt>Evidence</dt><dd>Simulation with released code. With sensor faults injected, reliability-weighted fusion detected the fire in 94% of fire runs with 5% false alarms. With a deliberately offset first aim, the full loop extinguished the simulated fire in 86% of 100 trials against 0% for the open-loop and adaptive-flow baselines.</dd>
+          <dt>Scope</dt><dd>The subsystems are built and being integrated. No hardware results are reported yet.</dd>
         </dl>
         <a class="more" href="project5.html">Read the project page</a>
       </article>
 
       <article class="study">
-        <span class="status review">Under review</span>
+        <span class="status accepted">Accepted</span>
         <h3><a href="project7.html">Search-and-rescue planner for microcontroller-class robots</a></h3>
         <p>With only ultrasonic, motion, temperature, gas and inertial sensors, an ESP32 robot has to decide where to search next and which sensor is worth the battery. A Search Priority Score combines victim likelihood, hazard, navigation risk, distance and remaining charge, and an active-sensing rule spends energy only where the evidence is ambiguous.</p>
         <dl class="facts">
-          <dt>Papers</dt><dd>Submitted to four conferences: SCA 2026, ICRA 2027, ACDSA 2027 and CSAI Days 2026.</dd>
-          <dt>Evidence</dt><dd>Simulation, 300 episodes per policy in each of six scenarios. Energy per verified detection fell by roughly 30 to 41% against always-sample fusion, and mission success on a 30% battery was 61% against 0% for the baselines. Detection rate was lower than static fusion (0.602 against 0.670).</dd>
-          <dt>Scope</dt><dd>The platform has not been assembled yet. Results come from a documented synthetic sensor model.</dd>
+          <dt>Paper</dt><dd>Accepted for oral presentation at the International Conference on Cybersecurity &amp; Artificial Intelligence (CSAI Days 2026), 29 October 2026.</dd>
+          <dt>Evidence</dt><dd>Simulation of 23,400 episodes across six scenarios and thirteen policies, with released code. Active sensing cut energy per verified detection by about 24% against always-sample fusion with no detectable change in detection or false-positive rate. Under a 30% battery cap, most of the survival advantage came from a simple reserve rule, not from the battery-dependent weights.</dd>
+          <dt>Scope</dt><dd>The platform has not been assembled yet. Results come from a documented synthetic sensor model and may shift on real hardware.</dd>
         </dl>
         <a class="more" href="project7.html">Read the project page</a>
       </article>
@@ -119,16 +119,22 @@
     
     <section id="publications">
       <h2>Publications</h2>
-      <p class="sec-intro">Listed by status, as of September 2026.</p>
+      <p class="sec-intro">Listed by status, as of November 2026, newest first.</p>
 
       <div class="pub-group">
         <h3><span class="status accepted">Accepted</span></h3>
         <ul class="pubs">
           <li class="pub">
-            <h4 class="pub-title"><a href="project4.html">A Vision-Based Assistive Robotic System with Real-Time Gesture Recognition for Communication Support in Speech-Impaired Cancer Patients: A Pilot Feasibility Study</a></h4>
-            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, D. V. Ojie, B. E. Iyamah, C. S. Chiemeke</p>
-            <p class="venue">Faculty of Natural and Applied Sciences Journal of Computing and Applications, vol. 3, no. 1, March 2026.</p>
-            <p class="kind">Journal article &middot; <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=uftesUcAAAAJ&citation_for_view=uftesUcAAAAJ:u5HHmVD_uO8C" rel="noopener">View on Google Scholar</a></p>
+            <h4 class="pub-title"><a href="project5.html">An Edge-AI Articulated Pan-and-Tilt Firefighting Robot with Risk-Adaptive Multi-sensor Perception and Suppression-Outcome Feedback for Indoor Smart Building Fire Response</a></h4>
+            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, C. S. Chiemeke, D. V. Ojie, F. Chete</p>
+            <p class="venue">11th International Conference on Smart Cities &amp; Applications (SCA 2026), Karabük University, Türkiye, 10 to 12 November 2026. Publication is planned in Springer's Lecture Notes in Networks and Systems (LNNS); the paper will be submitted for Scopus indexing but is not yet Scopus-indexed.</p>
+            <p class="kind">Conference paper &middot; <a href="https://github.com/blossomchi/Raps-Sof-Simulation" rel="noopener">Simulation code</a></p>
+          </li>
+          <li class="pub">
+            <h4 class="pub-title"><a href="project7.html">Active, Risk-Aware Multimodal Search for Resource-Constrained Autonomous Search-and-Rescue Robots</a></h4>
+            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, C. S. Chiemeke</p>
+            <p class="venue">International Conference on Cybersecurity &amp; Artificial Intelligence (CSAI Days 2026), accepted for oral presentation, 29 October 2026.</p>
+            <p class="kind">Conference paper &middot; <a href="https://github.com/blossomchi/Search-and-Rescue-Robots" rel="noopener">Simulation code</a></p>
           </li>
           <li class="pub">
             <h4 class="pub-title"><a href="project4.html">Vision-Based Assistive Robotic System with Real-Time Gesture Recognition and Cross-Domain Adaptive Learning for Communication Support in Speech-Impaired Cancer Patients</a></h4>
@@ -136,23 +142,11 @@
             <p class="venue">2026 International Conference on Advanced Robotics and Mechatronics (ICARM 2026), University of Évry Paris-Saclay, France, 21 to 23 July 2026.</p>
             <p class="kind">Conference paper</p>
           </li>
-        </ul>
-      </div>
-
-      <div class="pub-group">
-        <h3><span class="status review">Under review</span></h3>
-        <ul class="pubs">
           <li class="pub">
-            <h4 class="pub-title"><a href="project5.html">An Edge-AI Humanoid Firefighting Robot with Risk-Adaptive Multisensor Perception and Suppression-Outcome Feedback for Smart-Building Disaster Response</a></h4>
-            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, C. S. Chiemeke</p>
-            <p class="venue">Submitted to four conferences: SCA 2026 (11th International Conference on Smart Cities &amp; Applications), ICRA 2027 (2027 IEEE International Conference on Robotics and Automation), ACDSA 2027 (International Conference on Artificial Intelligence, Computer, Data Sciences, and Applications) and CSAI Days 2026 (International Conference on Cybersecurity &amp; Artificial Intelligence).</p>
-            <p class="kind">Conference paper</p>
-          </li>
-          <li class="pub">
-            <h4 class="pub-title"><a href="project7.html">Active, Risk-Aware Multimodal Search for Resource-Constrained Autonomous Search-and-Rescue Robots</a></h4>
-            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, C. S. Chiemeke</p>
-            <p class="venue">Submitted to four conferences: SCA 2026 (11th International Conference on Smart Cities &amp; Applications), ICRA 2027 (2027 IEEE International Conference on Robotics and Automation), ACDSA 2027 (International Conference on Artificial Intelligence, Computer, Data Sciences, and Applications) and CSAI Days 2026 (International Conference on Cybersecurity &amp; Artificial Intelligence).</p>
-            <p class="kind">Conference paper</p>
+            <h4 class="pub-title"><a href="project4.html">A Vision-Based Assistive Robotic System with Real-Time Gesture Recognition for Communication Support in Speech-Impaired Cancer Patients: A Pilot Feasibility Study</a></h4>
+            <p class="authors">A. E. Okpako, <strong>C. B. Oyem</strong>, D. V. Ojie, B. E. Iyamah, C. S. Chiemeke</p>
+            <p class="venue">Faculty of Natural and Applied Sciences Journal of Computing and Applications, vol. 3, no. 1, March 2026.</p>
+            <p class="kind">Journal article &middot; <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=uftesUcAAAAJ&citation_for_view=uftesUcAAAAJ:u5HHmVD_uO8C" rel="noopener">View on Google Scholar</a></p>
           </li>
         </ul>
       </div>
@@ -201,7 +195,7 @@
     <section id="teaching">
       <h2>Teaching</h2>
       <p class="sec-intro">Boot camps, courses and online tutorials, from first lines of code to drone piloting.</p>
-      <p>Since 2019 I have coordinated an AI boot camp for teens and kids at Rolof Computer Academy in Warri. I have trained more than 100 students in Python and in DIY drone assembly and piloting. As College Registrar I also teach Arduino robotics, programming, databases, systems analysis and data security, and my YouTube channel, <a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">Blossom Coding World</a>, covers coding from beginner to professional level.</p>
+      <p>Since 2019 I have coordinated an AI boot camp for teens and kids at Rolof Computer Academy in Warri. I have trained more than 200 students in Python and in DIY drone assembly and piloting. As College Registrar I also teach Arduino robotics, programming, databases, systems analysis and data security, and my YouTube channel, <a href="https://www.youtube.com/@BlossomCodingWorld" rel="noopener">Blossom Coding World</a>, covers coding from beginner to professional level.</p>
       <p>Courses taught: computer basics, VB.NET, SQL, PL/SQL, software project management, scientific programming in C#, systems analysis and design, Arduino, Python, UML and data security.</p>
       <h3 class="sub">Student projects supervised</h3>
       <ul class="plain">
@@ -210,12 +204,15 @@
         <li>Online hotel booking system <span>(2022/2023)</span></li>
         <li>Food ordering system <span>(2022/2023)</span></li>
         <li>Real estate website <span>(2022/2023)</span></li>
+        <li>Facial recognition attendance system <span>(2023/2024)</span></li>
+        <li>Medication reminder application <span>(2023/2024)</span></li>
+        <li>Online doctor appointment booking system <span>(2023/2024)</span></li>
       </ul>
     </section>
     
     <section id="background">
       <h2>Background</h2>
-      <p class="sec-intro">Over ten years in software development, six of them in robotics.</p>
+      <p class="sec-intro">Over ten years in software development, about eight of them in robotics.</p>
       <ul class="timeline">
         <li><span class="when">Current</span><div><strong>Head of ICT</strong><p>Rolof Institute of Management and Technology, Delta State</p></div></li>
         <li><span class="when">2022 to 2025</span><div><strong>General Manager, Information Technology</strong><p>Rolof Computers Limited, now Rolof IMT Store, Warri. Previously Assistant General Manager, Information Technology (2016 to 2020).</p></div></li>
@@ -280,7 +277,7 @@
     </section>
     </div>
 
-    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of September 2026.</footer>
+    <footer class="foot wrap">&copy; <span data-year>2026</span> Chinyere Blossom Oyem. Research statuses reflect the state of each manuscript as of November 2026.</footer>
   </main>
 </div>
 <script src="site.js" defer></script>
